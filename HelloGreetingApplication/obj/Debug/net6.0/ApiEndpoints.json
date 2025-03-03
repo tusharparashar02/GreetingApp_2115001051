@@ -1,8 +1,8 @@
 [
   {
-    "ContainingType": "HelloGreetingApplication.Controllers.HelloGreetingController",
+    "ContainingType": "YourNamespace.Controllers.HelloGreetingController",
     "Method": "Get",
-    "RelativePath": "HelloGreeting",
+    "RelativePath": "api/HelloGreeting",
     "HttpMethod": "GET",
     "IsController": true,
     "Order": 0,
@@ -10,15 +10,15 @@
     "ReturnTypes": []
   },
   {
-    "ContainingType": "HelloGreetingApplication.Controllers.HelloGreetingController",
+    "ContainingType": "YourNamespace.Controllers.HelloGreetingController",
     "Method": "Post",
-    "RelativePath": "HelloGreeting",
+    "RelativePath": "api/HelloGreeting",
     "HttpMethod": "POST",
     "IsController": true,
     "Order": 0,
     "Parameters": [
       {
-        "Name": "requestModel",
+        "Name": "request",
         "Type": "ModelLayer.Model.RequestModel",
         "IsRequired": true
       }
@@ -26,15 +26,15 @@
     "ReturnTypes": []
   },
   {
-    "ContainingType": "HelloGreetingApplication.Controllers.HelloGreetingController",
+    "ContainingType": "YourNamespace.Controllers.HelloGreetingController",
     "Method": "Put",
-    "RelativePath": "HelloGreeting",
+    "RelativePath": "api/HelloGreeting",
     "HttpMethod": "PUT",
     "IsController": true,
     "Order": 0,
     "Parameters": [
       {
-        "Name": "requestModel",
+        "Name": "request",
         "Type": "ModelLayer.Model.RequestModel",
         "IsRequired": true
       }
@@ -42,15 +42,15 @@
     "ReturnTypes": []
   },
   {
-    "ContainingType": "HelloGreetingApplication.Controllers.HelloGreetingController",
+    "ContainingType": "YourNamespace.Controllers.HelloGreetingController",
     "Method": "Patch",
-    "RelativePath": "HelloGreeting",
+    "RelativePath": "api/HelloGreeting",
     "HttpMethod": "PATCH",
     "IsController": true,
     "Order": 0,
     "Parameters": [
       {
-        "Name": "requestModel",
+        "Name": "request",
         "Type": "ModelLayer.Model.RequestModel",
         "IsRequired": true
       }
@@ -58,19 +58,13 @@
     "ReturnTypes": []
   },
   {
-    "ContainingType": "HelloGreetingApplication.Controllers.HelloGreetingController",
+    "ContainingType": "YourNamespace.Controllers.HelloGreetingController",
     "Method": "Delete",
-    "RelativePath": "HelloGreeting",
+    "RelativePath": "api/HelloGreeting",
     "HttpMethod": "DELETE",
     "IsController": true,
     "Order": 0,
-    "Parameters": [
-      {
-        "Name": "requestModel",
-        "Type": "ModelLayer.Model.RequestModel",
-        "IsRequired": true
-      }
-    ],
+    "Parameters": [],
     "ReturnTypes": []
   }
 ]

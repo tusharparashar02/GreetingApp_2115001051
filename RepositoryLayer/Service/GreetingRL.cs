@@ -9,5 +9,6 @@ namespace RepositoryLayer.Service
 {
     public class GreetingRL : IGreetingRL
     {
+       
     }
 }

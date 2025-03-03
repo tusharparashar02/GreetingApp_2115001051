@@ -9,3 +9,15 @@ D:\3-DotNet_Training_Assignments\ClassRoom_Project\HelloGreetingApplication\Mode
 D:\3-DotNet_Training_Assignments\ClassRoom_Project\HelloGreetingApplication\ModelLayer\obj\Debug\net6.0\refint\ModelLayer.dll
 D:\3-DotNet_Training_Assignments\ClassRoom_Project\HelloGreetingApplication\ModelLayer\obj\Debug\net6.0\ModelLayer.pdb
 D:\3-DotNet_Training_Assignments\ClassRoom_Project\HelloGreetingApplication\ModelLayer\obj\Debug\net6.0\ref\ModelLayer.dll
+D:\GreetingApp_2115001051\ModelLayer\bin\Debug\net6.0\ModelLayer.deps.json
+D:\GreetingApp_2115001051\ModelLayer\bin\Debug\net6.0\ModelLayer.dll
+D:\GreetingApp_2115001051\ModelLayer\bin\Debug\net6.0\ModelLayer.pdb
+D:\GreetingApp_2115001051\ModelLayer\obj\Debug\net6.0\ModelLayer.GeneratedMSBuildEditorConfig.editorconfig
+D:\GreetingApp_2115001051\ModelLayer\obj\Debug\net6.0\ModelLayer.AssemblyInfoInputs.cache
+D:\GreetingApp_2115001051\ModelLayer\obj\Debug\net6.0\ModelLayer.AssemblyInfo.cs
+D:\GreetingApp_2115001051\ModelLayer\obj\Debug\net6.0\ModelLayer.csproj.CoreCompileInputs.cache
+D:\GreetingApp_2115001051\ModelLayer\obj\Debug\net6.0\ModelLayer.sourcelink.json
+D:\GreetingApp_2115001051\ModelLayer\obj\Debug\net6.0\ModelLayer.dll
+D:\GreetingApp_2115001051\ModelLayer\obj\Debug\net6.0\refint\ModelLayer.dll
+D:\GreetingApp_2115001051\ModelLayer\obj\Debug\net6.0\ModelLayer.pdb
+D:\GreetingApp_2115001051\ModelLayer\obj\Debug\net6.0\ref\ModelLayer.dll

@@ -1,5 +1,7 @@
 using NLog;
 using NLog.Web;
+using BusinessLayer.Service;
+using BusinessLayer.Interface;
 var builder = WebApplication.CreateBuilder(args);
 
 
@@ -9,6 +11,7 @@ logger.Info("Application is starting");
 // Add services to the container.
 
 builder.Services.AddControllers();
+builder.Services.AddScoped<IGreetingBL, GreetingBL>();
 
 //Add swagger to container
 

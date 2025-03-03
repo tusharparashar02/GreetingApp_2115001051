@@ -1269,11 +1269,11 @@
   "project": {
     "version": "1.0.0",
     "restore": {
-      "projectUniqueName": "D:\\3-DotNet_Training_Assignments\\ClassRoom_Project\\HelloGreetingApplication\\HelloGreetingApplication\\HelloGreetingApplication.csproj",
+      "projectUniqueName": "D:\\GreetingApp_2115001051\\HelloGreetingApplication\\HelloGreetingApplication.csproj",
       "projectName": "HelloGreetingApplication",
-      "projectPath": "D:\\3-DotNet_Training_Assignments\\ClassRoom_Project\\HelloGreetingApplication\\HelloGreetingApplication\\HelloGreetingApplication.csproj",
+      "projectPath": "D:\\GreetingApp_2115001051\\HelloGreetingApplication\\HelloGreetingApplication.csproj",
       "packagesPath": "C:\\Users\\tusha\\.nuget\\packages\\",
-      "outputPath": "D:\\3-DotNet_Training_Assignments\\ClassRoom_Project\\HelloGreetingApplication\\HelloGreetingApplication\\obj\\",
+      "outputPath": "D:\\GreetingApp_2115001051\\HelloGreetingApplication\\obj\\",
       "projectStyle": "PackageReference",
       "fallbackFolders": [
         "C:\\Program Files (x86)\\Microsoft Visual Studio\\Shared\\NuGetPackages"
@@ -1294,8 +1294,8 @@
         "net6.0": {
           "targetAlias": "net6.0",
           "projectReferences": {
-            "D:\\3-DotNet_Training_Assignments\\ClassRoom_Project\\HelloGreetingApplication\\BusinessLayer\\BusinessLayer.csproj": {
-              "projectPath": "D:\\3-DotNet_Training_Assignments\\ClassRoom_Project\\HelloGreetingApplication\\BusinessLayer\\BusinessLayer.csproj"
+            "D:\\GreetingApp_2115001051\\BusinessLayer\\BusinessLayer.csproj": {
+              "projectPath": "D:\\GreetingApp_2115001051\\BusinessLayer\\BusinessLayer.csproj"
             }
           }
         }

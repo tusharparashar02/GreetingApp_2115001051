@@ -5,7 +5,7 @@
     "version": "1.0"
   },
   "paths": {
-    "/HelloGreeting": {
+    "/api/HelloGreeting": {
       "get": {
         "tags": [
           "HelloGreeting"
@@ -107,25 +107,6 @@
         "tags": [
           "HelloGreeting"
         ],
-        "requestBody": {
-          "content": {
-            "application/json": {
-              "schema": {
-                "$ref": "#/components/schemas/RequestModel"
-              }
-            },
-            "text/json": {
-              "schema": {
-                "$ref": "#/components/schemas/RequestModel"
-              }
-            },
-            "application/*+json": {
-              "schema": {
-                "$ref": "#/components/schemas/RequestModel"
-              }
-            }
-          }
-        },
         "responses": {
           "200": {
             "description": "OK"
@@ -139,11 +120,15 @@
       "RequestModel": {
         "type": "object",
         "properties": {
-          "key": {
+          "firstName": {
             "type": "string",
             "nullable": true
           },
-          "value": {
+          "lastName": {
+            "type": "string",
+            "nullable": true
+          },
+          "email": {
             "type": "string",
             "nullable": true
           }

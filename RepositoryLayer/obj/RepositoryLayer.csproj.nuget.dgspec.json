@@ -1,17 +1,17 @@
 {
   "format": 1,
   "restore": {
-    "D:\\3-DotNet_Training_Assignments\\ClassRoom_Project\\HelloGreetingApplication\\RepositoryLayer\\RepositoryLayer.csproj": {}
+    "D:\\GreetingApp_2115001051\\RepositoryLayer\\RepositoryLayer.csproj": {}
   },
   "projects": {
-    "D:\\3-DotNet_Training_Assignments\\ClassRoom_Project\\HelloGreetingApplication\\ModelLayer\\ModelLayer.csproj": {
+    "D:\\GreetingApp_2115001051\\ModelLayer\\ModelLayer.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "D:\\3-DotNet_Training_Assignments\\ClassRoom_Project\\HelloGreetingApplication\\ModelLayer\\ModelLayer.csproj",
+        "projectUniqueName": "D:\\GreetingApp_2115001051\\ModelLayer\\ModelLayer.csproj",
         "projectName": "ModelLayer",
-        "projectPath": "D:\\3-DotNet_Training_Assignments\\ClassRoom_Project\\HelloGreetingApplication\\ModelLayer\\ModelLayer.csproj",
+        "projectPath": "D:\\GreetingApp_2115001051\\ModelLayer\\ModelLayer.csproj",
         "packagesPath": "C:\\Users\\tusha\\.nuget\\packages\\",
-        "outputPath": "D:\\3-DotNet_Training_Assignments\\ClassRoom_Project\\HelloGreetingApplication\\ModelLayer\\obj\\",
+        "outputPath": "D:\\GreetingApp_2115001051\\ModelLayer\\obj\\",
         "projectStyle": "PackageReference",
         "fallbackFolders": [
           "C:\\Program Files (x86)\\Microsoft Visual Studio\\Shared\\NuGetPackages"
@@ -69,14 +69,14 @@
         }
       }
     },
-    "D:\\3-DotNet_Training_Assignments\\ClassRoom_Project\\HelloGreetingApplication\\RepositoryLayer\\RepositoryLayer.csproj": {
+    "D:\\GreetingApp_2115001051\\RepositoryLayer\\RepositoryLayer.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "D:\\3-DotNet_Training_Assignments\\ClassRoom_Project\\HelloGreetingApplication\\RepositoryLayer\\RepositoryLayer.csproj",
+        "projectUniqueName": "D:\\GreetingApp_2115001051\\RepositoryLayer\\RepositoryLayer.csproj",
         "projectName": "RepositoryLayer",
-        "projectPath": "D:\\3-DotNet_Training_Assignments\\ClassRoom_Project\\HelloGreetingApplication\\RepositoryLayer\\RepositoryLayer.csproj",
+        "projectPath": "D:\\GreetingApp_2115001051\\RepositoryLayer\\RepositoryLayer.csproj",
         "packagesPath": "C:\\Users\\tusha\\.nuget\\packages\\",
-        "outputPath": "D:\\3-DotNet_Training_Assignments\\ClassRoom_Project\\HelloGreetingApplication\\RepositoryLayer\\obj\\",
+        "outputPath": "D:\\GreetingApp_2115001051\\RepositoryLayer\\obj\\",
         "projectStyle": "PackageReference",
         "fallbackFolders": [
           "C:\\Program Files (x86)\\Microsoft Visual Studio\\Shared\\NuGetPackages"
@@ -97,8 +97,8 @@
           "net6.0": {
             "targetAlias": "net6.0",
             "projectReferences": {
-              "D:\\3-DotNet_Training_Assignments\\ClassRoom_Project\\HelloGreetingApplication\\ModelLayer\\ModelLayer.csproj": {
-                "projectPath": "D:\\3-DotNet_Training_Assignments\\ClassRoom_Project\\HelloGreetingApplication\\ModelLayer\\ModelLayer.csproj"
+              "D:\\GreetingApp_2115001051\\ModelLayer\\ModelLayer.csproj": {
+                "projectPath": "D:\\GreetingApp_2115001051\\ModelLayer\\ModelLayer.csproj"
               }
             }
           }
