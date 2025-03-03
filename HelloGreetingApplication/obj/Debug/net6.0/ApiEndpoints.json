@@ -1,6 +1,6 @@
 [
   {
-    "ContainingType": "YourNamespace.Controllers.HelloGreetingController",
+    "ContainingType": "HelloGreeting.Controllers.HelloGreetingController",
     "Method": "Get",
     "RelativePath": "api/HelloGreeting",
     "HttpMethod": "GET",
@@ -10,7 +10,7 @@
     "ReturnTypes": []
   },
   {
-    "ContainingType": "YourNamespace.Controllers.HelloGreetingController",
+    "ContainingType": "HelloGreeting.Controllers.HelloGreetingController",
     "Method": "Post",
     "RelativePath": "api/HelloGreeting",
     "HttpMethod": "POST",
@@ -26,7 +26,7 @@
     "ReturnTypes": []
   },
   {
-    "ContainingType": "YourNamespace.Controllers.HelloGreetingController",
+    "ContainingType": "HelloGreeting.Controllers.HelloGreetingController",
     "Method": "Put",
     "RelativePath": "api/HelloGreeting",
     "HttpMethod": "PUT",
@@ -42,7 +42,7 @@
     "ReturnTypes": []
   },
   {
-    "ContainingType": "YourNamespace.Controllers.HelloGreetingController",
+    "ContainingType": "HelloGreeting.Controllers.HelloGreetingController",
     "Method": "Patch",
     "RelativePath": "api/HelloGreeting",
     "HttpMethod": "PATCH",
@@ -58,7 +58,7 @@
     "ReturnTypes": []
   },
   {
-    "ContainingType": "YourNamespace.Controllers.HelloGreetingController",
+    "ContainingType": "HelloGreeting.Controllers.HelloGreetingController",
     "Method": "Delete",
     "RelativePath": "api/HelloGreeting",
     "HttpMethod": "DELETE",

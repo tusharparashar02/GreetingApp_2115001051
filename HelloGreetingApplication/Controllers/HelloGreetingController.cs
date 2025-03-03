@@ -4,7 +4,7 @@ using Microsoft.Extensions.Logging;
 using ModelLayer.Model;
 using System;
 
-namespace YourNamespace.Controllers
+namespace HelloGreeting.Controllers
 {
     [Route("api/[controller]")]
     [ApiController]
@@ -39,7 +39,8 @@ namespace YourNamespace.Controllers
         public IActionResult Post([FromBody] RequestModel request)
         {
             _logger.LogInformation("Executing POST request with data: {FirstName} {LastName}", request.FirstName, request.LastName);
-            var data = new { Greeting = $"Hello {request.FirstName} {request.LastName}", Email = request.Email, ReceivedAt = DateTime.Now };
+            var greetingResult = _greetingBL.GetGreeting(request.FirstName, request.LastName);
+            var data = new { Greeting = greetingResult, Email = request.Email, ReceivedAt = DateTime.Now };
 
             var response = new ResponseModel<object>
             {
