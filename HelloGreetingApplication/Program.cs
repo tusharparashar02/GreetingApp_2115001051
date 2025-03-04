@@ -1,3 +1,5 @@
+using BusinessLayer.Interface;
+using BusinessLayer.Service;
 using NLog;
 using NLog.Web;
 
@@ -13,6 +15,7 @@ logger.Info("Application is starting");
 try
 {
     // Add services to the container
+    builder.Services.AddScoped<IGreetingBL, GreetingBL>();
     builder.Services.AddControllers();  // Adding controllers to the DI container
 
     // Add Swagger to the container

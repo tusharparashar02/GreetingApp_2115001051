@@ -266,6 +266,7 @@
       },
       "BusinessLayer/1.0.0": {
         "dependencies": {
+          "NLog": "5.4.0",
           "RepositoryLayer": "1.0.0"
         },
         "runtime": {
