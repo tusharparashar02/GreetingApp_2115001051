@@ -18,42 +18,65 @@ namespace BusinessLayer.Service
         private string _greetingMessage = "Hello World";
 
         /// <summary>
-        /// Retrieves the current greeting message.
+        /// Retrieves the current greeting message with user attributes.
         /// </summary>
-        /// <returns>A response model containing the greeting message.</returns>
+        /// <returns>ResponseModel containing the formatted greeting message.</returns>
         public ResponseModel<string> GetGreetingBL()
         {
             logger.Info("Fetching greeting message.");
+
+            // Splitting _greetingMessage to extract first and last name if available
+            string[] words = _greetingMessage.Split(' ', StringSplitOptions.RemoveEmptyEntries);
+            string firstName = words.Length > 0 ? words[0] : "";
+            string lastName = words.Length > 1 ? words[1] : "";
+
+            string finalGreeting;
+            if (!string.IsNullOrEmpty(firstName))
+            {
+                if (!string.IsNullOrEmpty(lastName))
+                {
+                    finalGreeting = $"Hello, {firstName} {lastName}!";
+                }
+                else
+                {
+                    finalGreeting = $"Hello, {firstName}!";
+                }
+            }
+            else
+            {
+                finalGreeting = "Hello World!";
+            }
+
             return new ResponseModel<string>
             {
                 Success = true,
-                Data = _greetingMessage,
-                Message = "Hello to Greeting App API endpoint"
+                Data = finalGreeting,
+                Message = "Greeting retrieved successfully"
             };
         }
 
         /// <summary>
         /// Adds a new greeting message using the provided request model.
         /// </summary>
-        /// <param name="requestModel">The request model containing the key and value for the greeting.</param>
-        /// <returns>A response model with the newly added greeting message.</returns>
+        /// <param name="requestModel">Request model containing the key and value for the greeting.</param>
+        /// <returns>ResponseModel with the newly set greeting message.</returns>
         public ResponseModel<string> AddGreetingBL(RequestModel requestModel)
         {
             logger.Info($"Adding new greeting with Key: {requestModel.Key}, Value: {requestModel.Value}");
-            _greetingMessage = $"{requestModel.Key}: {requestModel.Value}";
+            _greetingMessage = $"{requestModel.Key} {requestModel.Value}".Trim();
             return new ResponseModel<string>
             {
                 Success = true,
                 Data = _greetingMessage,
-                Message = $"Key: {requestModel.Key} , Value: {requestModel.Value}"
+                Message = $"Greeting message set successfully"
             };
         }
 
         /// <summary>
         /// Updates the greeting message with a new value.
         /// </summary>
-        /// <param name="requestModel">The request model containing the updated greeting message.</param>
-        /// <returns>A response model confirming the update.</returns>
+        /// <param name="requestModel">Request model containing the updated greeting message.</param>
+        /// <returns>ResponseModel confirming the updated greeting message.</returns>
         public ResponseModel<string> UpdateGreetingBL(RequestModel requestModel)
         {
             logger.Info($"Updating greeting message to: {requestModel.Value}");
@@ -69,8 +92,8 @@ namespace BusinessLayer.Service
         /// <summary>
         /// Partially updates the greeting message with a new value.
         /// </summary>
-        /// <param name="newValue">The new greeting message.</param>
-        /// <returns>A response model confirming the partial update.</returns>
+        /// <param name="newValue">The new greeting message to update partially.</param>
+        /// <returns>ResponseModel confirming the partial update.</returns>
         public ResponseModel<string> PartialUpdateGreetingBL(string newValue)
         {
             logger.Info($"Partially updating greeting message to: {newValue}");
@@ -85,7 +108,7 @@ namespace BusinessLayer.Service
         /// <summary>
         /// Deletes the greeting message and resets it to an empty string.
         /// </summary>
-        /// <returns>A response model confirming the deletion.</returns>
+        /// <returns>ResponseModel confirming the deletion of the greeting message.</returns>
         public ResponseModel<string> DeleteGreetingBL()
         {
             logger.Info("Deleting greeting message.");
@@ -99,3 +122,4 @@ namespace BusinessLayer.Service
         }
     }
 }
+
