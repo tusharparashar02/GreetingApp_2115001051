@@ -12,5 +12,6 @@ namespace RepositoryLayer.Interface
     {
         ResponseModel<string> AddGreetingRL(RequestModel requestModel);
         UserEntity GetUserById(int id);
+        public List<UserEntity> GetAllUsers();
     }
 }

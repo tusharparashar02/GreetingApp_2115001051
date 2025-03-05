@@ -81,5 +81,17 @@ namespace RepositoryLayer.Service
             logger.Info($"User with ID {id} found.");
             return val;
         }
+
+        /// <summary>
+        /// Retrieves all users from the database.
+        /// </summary>
+        /// <returns>List of user entities.</returns>
+        public List<UserEntity> GetAllUsers()
+        {
+            logger.Info("Fetching all users from the database.");
+            var result = _context.Users.ToList();
+            logger.Info("All users fetched successfully.");
+            return result;
+        }
     }
 }

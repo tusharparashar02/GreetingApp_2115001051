@@ -64,6 +64,25 @@ namespace BusinessLayer.Service
         }
 
         /// <summary>
+        /// Retrieves all users from the database.
+        /// </summary>
+        /// <returns>ResponseModel containing the list of all users.</returns>
+        public ResponseModel<List<UserEntity>> GetAllUsers()
+        {
+            logger.Info("Fetching all users.");
+            var result = _greetingRL.GetAllUsers();
+
+            if (result.Count < 1)
+            {
+                logger.Warn("No users found in the database.");
+                return new ResponseModel<List<UserEntity>> { Success = true, Message = "No data found" };
+            }
+
+            logger.Info("All users fetched successfully.");
+            return new ResponseModel<List<UserEntity>> { Success = true, Message = "All users", Data = result };
+        }
+
+        /// <summary>
         /// Adds a new greeting message using the provided request model.
         /// </summary>
         /// <param name="requestModel">Request model containing the key and value for the greeting.</param>

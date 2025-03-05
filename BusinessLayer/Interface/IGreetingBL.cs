@@ -17,5 +17,6 @@ namespace BusinessLayer.Interface
         ResponseModel<string> DeleteGreetingBL();
 
         ResponseModel<UserEntity> GetUserById(int id);
+        ResponseModel<List<UserEntity>> GetAllUsers();
     }
 }

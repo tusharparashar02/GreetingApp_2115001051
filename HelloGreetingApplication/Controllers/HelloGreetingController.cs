@@ -47,6 +47,19 @@ namespace HelloGreetingApplication.Controllers
         }
 
         /// <summary>
+        /// Get method to retrieve all users.
+        /// </summary>
+        /// <returns>Response Model with list of users</returns>
+        [HttpGet("users")]
+        public IActionResult GetAllUsers()
+        {
+            logger.Info("GET request received to fetch all users.");
+            var response = _greetingBL.GetAllUsers();
+            logger.Info("GET request for all users processed successfully.");
+            return Ok(response);
+        }
+
+        /// <summary>
         /// Post method to add the new greeting message.
         /// </summary>
         /// <param name="requestModel">Request Model</param>
