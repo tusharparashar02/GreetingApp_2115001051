@@ -112,17 +112,18 @@ namespace BusinessLayer.Service
         /// <summary>
         /// Partially updates the greeting message with a new value.
         /// </summary>
-        /// <param name="newValue">The new greeting message to update partially.</param>
+        /// <param name="requestModel">The new greeting message to update partially.</param>
         /// <returns>ResponseModel confirming the partial update.</returns>
-        public ResponseModel<string> PartialUpdateGreetingBL(string newValue)
+        public ResponseModel<UserEntity> PartialUpdateGreetingBL(RequestModel requestModel)
         {
-            logger.Info($"Partially updating greeting message to: {newValue}");
-            return new ResponseModel<string>
+            logger.Info($"Partially updating greeting message to: {requestModel.Message}");
+
+            var val = _greetingRL.PartialUpdateGreetingBL(requestModel);
+            if (val == null)
             {
-                Success = true,
-                Data = newValue,
-                Message = "Greeting partially updated successfully"
-            };
+                return new ResponseModel<UserEntity> { Success = false, Message = "No user of this id is founded", Data = null };
+            }
+            return new ResponseModel<UserEntity> { Success = true, Message = "Message is updated", Data = val };
         }
 
         /// <summary>

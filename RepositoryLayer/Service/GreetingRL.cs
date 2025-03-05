@@ -93,5 +93,28 @@ namespace RepositoryLayer.Service
             logger.Info("All users fetched successfully.");
             return result;
         }
+
+        /// <summary>
+        /// Updates the message of an existing user if the provided ID is correct.
+        /// </summary>
+        /// <param name="requestModel">Request model containing the user ID and new message.</param>
+        /// <returns>Updated user entity if successful; otherwise, null.</returns>
+        public UserEntity PartialUpdateGreetingBL(RequestModel requestModel)
+        {
+            logger.Info($"Updating message for user with ID: {requestModel.Id}");
+
+            var user = _context.Users.FirstOrDefault(e => e.Id == requestModel.Id);
+            if (user == null)
+            {
+                logger.Warn($"User with ID {requestModel.Id} not found.");
+                return null;
+            }
+
+            user.Message = requestModel.Message;
+            _context.SaveChanges();
+
+            logger.Info($"User with ID {requestModel.Id} message updated successfully.");
+            return user;
+        }
     }
 }

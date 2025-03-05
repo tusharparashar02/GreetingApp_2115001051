@@ -13,7 +13,7 @@ namespace BusinessLayer.Interface
         ResponseModel<string> GetGreetingBL(string FirstName = "", string LastName = "");
         ResponseModel<string> AddGreetingBL(RequestModel requestModel);
         ResponseModel<string> UpdateGreetingBL(RequestModel requestModel);
-        ResponseModel<string> PartialUpdateGreetingBL(string newValue);
+        ResponseModel<UserEntity> PartialUpdateGreetingBL(RequestModel requestModel);
         ResponseModel<string> DeleteGreetingBL();
 
         ResponseModel<UserEntity> GetUserById(int id);

@@ -88,14 +88,14 @@ namespace HelloGreetingApplication.Controllers
         /// <summary>
         /// Patch method to update the single change in greeting message.
         /// </summary>
-        /// <param name="newValue">New message value</param>
+        /// <param name="requestModel">New message value</param>
         /// <returns>Response Model with partially updated greeting message</returns>
         [HttpPatch]
-        public IActionResult Patch(string newValue)
+        public IActionResult Patch(RequestModel requestModel)
         {
-            logger.Info($"PATCH request received to update greeting to: {newValue}");
+            logger.Info($"PATCH request received to update greeting to: {requestModel.Message}");
             logger.Info("PATCH request processed successfully.");
-            return Ok(_greetingBL.PartialUpdateGreetingBL(newValue));
+            return Ok(_greetingBL.PartialUpdateGreetingBL(requestModel));
         }
 
         /// <summary>

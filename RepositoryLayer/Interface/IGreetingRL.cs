@@ -13,5 +13,6 @@ namespace RepositoryLayer.Interface
         ResponseModel<string> AddGreetingRL(RequestModel requestModel);
         UserEntity GetUserById(int id);
         public List<UserEntity> GetAllUsers();
+        UserEntity PartialUpdateGreetingBL(RequestModel requestModel);
     }
 }
