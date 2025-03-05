@@ -2,6 +2,7 @@
 using BusinessLayer.Interface;
 using ModelLayer.Model;
 using NLog;
+using RepositoryLayer.Entity;
 using RepositoryLayer.Interface;
 
 namespace BusinessLayer.Service
@@ -40,6 +41,26 @@ namespace BusinessLayer.Service
                 Data = finalGreeting,
                 Message = $"Hello, {finalGreeting}"
             };
+        }
+        /// <summary>
+        /// Retrieves a user by their unique ID.
+        /// </summary>
+        /// <param name="id">The unique identifier of the user.</param>
+        /// <returns>ResponseModel containing the user entity if found; otherwise, an error message.</returns>
+        public ResponseModel<UserEntity> GetUserById(int id)
+        {
+            logger.Info($"Fetching user with ID: {id}");
+
+            var val = _greetingRL.GetUserById(id);
+
+            if (val == null)
+            {
+                logger.Warn($"User with ID {id} not found.");
+                return new ResponseModel<UserEntity> { Success = false, Message = "User not found", Data = null };
+            }
+
+            logger.Info($"User with ID {id} found.");
+            return new ResponseModel<UserEntity> { Success = true, Message = "User present", Data = val };
         }
 
         /// <summary>

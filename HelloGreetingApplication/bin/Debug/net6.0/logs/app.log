@@ -196,3 +196,108 @@
 2025-03-05 10:22:36.3862 | INFO | Microsoft.AspNetCore.Mvc.Infrastructure.ControllerActionInvoker | Executed action HelloGreetingApplication.Controllers.HelloGreetingController.Get (HelloGreetingApplication) in 704.0899ms 
 2025-03-05 10:22:36.3862 | INFO | Microsoft.AspNetCore.Routing.EndpointMiddleware | Executed endpoint 'HelloGreetingApplication.Controllers.HelloGreetingController.Get (HelloGreetingApplication)' 
 2025-03-05 10:22:36.3959 | INFO | Microsoft.AspNetCore.Hosting.Diagnostics | Request finished HTTP/2 GET https://localhost:7089/HelloGreeting - - - 200 - application/json;+charset=utf-8 776.4114ms 
+2025-03-05 10:37:27.6400 | INFO | HelloGreetingApplication.Program | Application is starting 
+2025-03-05 10:37:28.7931 | INFO | Microsoft.Hosting.Lifetime | Now listening on: https://localhost:7089 
+2025-03-05 10:37:28.8059 | INFO | Microsoft.Hosting.Lifetime | Now listening on: http://localhost:5223 
+2025-03-05 10:37:28.8928 | INFO | Microsoft.Hosting.Lifetime | Application started. Press Ctrl+C to shut down. 
+2025-03-05 10:37:28.8928 | INFO | Microsoft.Hosting.Lifetime | Hosting environment: Development 
+2025-03-05 10:37:28.8928 | INFO | Microsoft.Hosting.Lifetime | Content root path: D:\GreetingApp\HelloGreetingApplication\ 
+2025-03-05 10:37:29.5260 | INFO | Microsoft.AspNetCore.Hosting.Diagnostics | Request starting HTTP/2 GET https://localhost:7089/Swagger/index.html - - 
+2025-03-05 10:37:30.0344 | INFO | Microsoft.AspNetCore.Hosting.Diagnostics | Request finished HTTP/2 GET https://localhost:7089/Swagger/index.html - - - 200 - text/html;charset=utf-8 516.4522ms 
+2025-03-05 10:37:30.0344 | INFO | Microsoft.AspNetCore.Hosting.Diagnostics | Request starting HTTP/2 GET https://localhost:7089/_framework/aspnetcore-browser-refresh.js - - 
+2025-03-05 10:37:30.0344 | INFO | Microsoft.AspNetCore.Hosting.Diagnostics | Request starting HTTP/2 GET https://localhost:7089/Swagger/index.js - - 
+2025-03-05 10:37:30.0344 | INFO | Microsoft.AspNetCore.Hosting.Diagnostics | Request starting HTTP/2 GET https://localhost:7089/_vs/browserLink - - 
+2025-03-05 10:37:30.0540 | INFO | Microsoft.AspNetCore.Hosting.Diagnostics | Request finished HTTP/2 GET https://localhost:7089/Swagger/index.js - - - 200 - application/javascript;charset=utf-8 12.2801ms 
+2025-03-05 10:37:30.0633 | INFO | Microsoft.AspNetCore.Hosting.Diagnostics | Request finished HTTP/2 GET https://localhost:7089/_framework/aspnetcore-browser-refresh.js - - - 200 12380 application/javascript;+charset=utf-8 21.9612ms 
+2025-03-05 10:37:30.1602 | INFO | Microsoft.AspNetCore.Hosting.Diagnostics | Request finished HTTP/2 GET https://localhost:7089/_vs/browserLink - - - 200 - text/javascript;+charset=UTF-8 118.0285ms 
+2025-03-05 10:37:30.2165 | INFO | Microsoft.AspNetCore.Hosting.Diagnostics | Request starting HTTP/2 GET https://localhost:7089/Swagger/v1/swagger.json - - 
+2025-03-05 10:37:30.2237 | INFO | Microsoft.AspNetCore.Hosting.Diagnostics | Request finished HTTP/2 GET https://localhost:7089/Swagger/v1/swagger.json - - - 200 - application/json;charset=utf-8 7.1871ms 
+2025-03-05 10:37:58.3882 | INFO | HelloGreetingApplication.Program | Application is starting 
+2025-03-05 10:37:59.4791 | INFO | Microsoft.Hosting.Lifetime | Now listening on: https://localhost:7089 
+2025-03-05 10:37:59.4898 | INFO | Microsoft.Hosting.Lifetime | Now listening on: http://localhost:5223 
+2025-03-05 10:37:59.5440 | INFO | Microsoft.Hosting.Lifetime | Application started. Press Ctrl+C to shut down. 
+2025-03-05 10:37:59.5440 | INFO | Microsoft.Hosting.Lifetime | Hosting environment: Development 
+2025-03-05 10:37:59.5440 | INFO | Microsoft.Hosting.Lifetime | Content root path: D:\GreetingApp\HelloGreetingApplication\ 
+2025-03-05 10:38:00.1852 | INFO | Microsoft.AspNetCore.Hosting.Diagnostics | Request starting HTTP/2 GET https://localhost:7089/Swagger/index.html - - 
+2025-03-05 10:38:00.5619 | INFO | Microsoft.AspNetCore.Hosting.Diagnostics | Request finished HTTP/2 GET https://localhost:7089/Swagger/index.html - - - 200 - text/html;charset=utf-8 380.6530ms 
+2025-03-05 10:38:00.5689 | INFO | Microsoft.AspNetCore.Hosting.Diagnostics | Request starting HTTP/2 GET https://localhost:7089/_framework/aspnetcore-browser-refresh.js - - 
+2025-03-05 10:38:00.5689 | INFO | Microsoft.AspNetCore.Hosting.Diagnostics | Request starting HTTP/2 GET https://localhost:7089/Swagger/index.js - - 
+2025-03-05 10:38:00.5689 | INFO | Microsoft.AspNetCore.Hosting.Diagnostics | Request starting HTTP/2 GET https://localhost:7089/_vs/browserLink - - 
+2025-03-05 10:38:00.5808 | INFO | Microsoft.AspNetCore.Hosting.Diagnostics | Request finished HTTP/2 GET https://localhost:7089/Swagger/index.js - - - 200 - application/javascript;charset=utf-8 11.8562ms 
+2025-03-05 10:38:00.5808 | INFO | Microsoft.AspNetCore.Hosting.Diagnostics | Request finished HTTP/2 GET https://localhost:7089/_framework/aspnetcore-browser-refresh.js - - - 200 12380 application/javascript;+charset=utf-8 16.2845ms 
+2025-03-05 10:38:00.6615 | INFO | Microsoft.AspNetCore.Hosting.Diagnostics | Request finished HTTP/2 GET https://localhost:7089/_vs/browserLink - - - 200 - text/javascript;+charset=UTF-8 89.8185ms 
+2025-03-05 10:38:00.7104 | INFO | Microsoft.AspNetCore.Hosting.Diagnostics | Request starting HTTP/2 GET https://localhost:7089/Swagger/v1/swagger.json - - 
+2025-03-05 10:38:00.7104 | INFO | Microsoft.AspNetCore.Hosting.Diagnostics | Request finished HTTP/2 GET https://localhost:7089/Swagger/v1/swagger.json - - - 200 - application/json;charset=utf-8 6.7219ms 
+2025-03-05 10:38:20.4408 | INFO | Microsoft.AspNetCore.Hosting.Diagnostics | Request starting HTTP/2 POST https://localhost:7089/HelloGreeting application/json 62 
+2025-03-05 10:38:20.4408 | INFO | Microsoft.AspNetCore.Routing.EndpointMiddleware | Executing endpoint 'HelloGreetingApplication.Controllers.HelloGreetingController.Post (HelloGreetingApplication)' 
+2025-03-05 10:38:20.5136 | INFO | Microsoft.AspNetCore.Mvc.Infrastructure.ControllerActionInvoker | Route matched with {action = "Post", controller = "HelloGreeting"}. Executing controller action with signature Microsoft.AspNetCore.Mvc.IActionResult Post(ModelLayer.Model.RequestModel) on controller HelloGreetingApplication.Controllers.HelloGreetingController (HelloGreetingApplication). 
+2025-03-05 10:38:21.7556 | INFO | HelloGreetingApplication.Controllers.HelloGreetingController | POST request received with Key: Tushar, Value: string 
+2025-03-05 10:38:21.7556 | INFO | HelloGreetingApplication.Controllers.HelloGreetingController | POST request processed successfully. 
+2025-03-05 10:38:21.7556 | INFO | RepositoryLayer.Service.GreetingRL | Adding new greeting message to database. 
+2025-03-05 10:38:23.7650 | INFO | Microsoft.EntityFrameworkCore.Infrastructure | Entity Framework Core 6.0.36 initialized 'UserContext' using provider 'Microsoft.EntityFrameworkCore.SqlServer:6.0.36' with options: None 
+2025-03-05 10:38:27.5303 | INFO | Microsoft.EntityFrameworkCore.Database.Command | Executed DbCommand (219ms) [Parameters=[@p0='?' (Size = 4000), @p1='?' (Size = 4000)], CommandType='Text', CommandTimeout='30']
+SET NOCOUNT ON;
+INSERT INTO [Users] ([FirstName], [LastName])
+VALUES (@p0, @p1);
+SELECT [Id]
+FROM [Users]
+WHERE @@ROWCOUNT = 1 AND [Id] = scope_identity(); 
+2025-03-05 10:38:27.8052 | INFO | RepositoryLayer.Service.GreetingRL | Greeting message saved successfully. 
+2025-03-05 10:38:27.8234 | INFO | Microsoft.AspNetCore.Mvc.Infrastructure.ObjectResultExecutor | Executing OkObjectResult, writing value of type 'ModelLayer.Model.ResponseModel`1[[System.String, System.Private.CoreLib, Version=6.0.0.0, Culture=neutral, PublicKeyToken=7cec85d7bea7798e]]'. 
+2025-03-05 10:38:27.8460 | INFO | Microsoft.AspNetCore.Mvc.Infrastructure.ControllerActionInvoker | Executed action HelloGreetingApplication.Controllers.HelloGreetingController.Post (HelloGreetingApplication) in 7317.5669ms 
+2025-03-05 10:38:27.8460 | INFO | Microsoft.AspNetCore.Routing.EndpointMiddleware | Executed endpoint 'HelloGreetingApplication.Controllers.HelloGreetingController.Post (HelloGreetingApplication)' 
+2025-03-05 10:38:27.8861 | INFO | Microsoft.AspNetCore.Hosting.Diagnostics | Request finished HTTP/2 POST https://localhost:7089/HelloGreeting application/json 62 - 200 - application/json;+charset=utf-8 7445.2110ms 
+2025-03-05 10:38:45.4578 | INFO | Microsoft.AspNetCore.Hosting.Diagnostics | Request starting HTTP/2 GET https://localhost:7089/HelloGreeting/user/0 - - 
+2025-03-05 10:38:45.4776 | INFO | Microsoft.AspNetCore.Routing.EndpointMiddleware | Executing endpoint 'HelloGreetingApplication.Controllers.HelloGreetingController.GetUserById (HelloGreetingApplication)' 
+2025-03-05 10:38:45.4887 | INFO | Microsoft.AspNetCore.Mvc.Infrastructure.ControllerActionInvoker | Route matched with {action = "GetUserById", controller = "HelloGreeting"}. Executing controller action with signature Microsoft.AspNetCore.Mvc.IActionResult GetUserById(Int32) on controller HelloGreetingApplication.Controllers.HelloGreetingController (HelloGreetingApplication). 
+2025-03-05 10:38:45.4887 | INFO | HelloGreetingApplication.Controllers.HelloGreetingController | GET request received for user with ID: 0 
+2025-03-05 10:38:45.4887 | INFO | BusinessLayer.Service.GreetingBL | Fetching user with ID: 0 
+2025-03-05 10:38:45.5322 | INFO | RepositoryLayer.Service.GreetingRL | Fetching user with ID: 0 
+2025-03-05 10:38:45.6683 | INFO | Microsoft.EntityFrameworkCore.Infrastructure | Entity Framework Core 6.0.36 initialized 'UserContext' using provider 'Microsoft.EntityFrameworkCore.SqlServer:6.0.36' with options: None 
+2025-03-05 10:38:47.0639 | INFO | Microsoft.EntityFrameworkCore.Database.Command | Executed DbCommand (19ms) [Parameters=[@__id_0='?' (DbType = Int32)], CommandType='Text', CommandTimeout='30']
+SELECT TOP(1) [u].[Id], [u].[FirstName], [u].[LastName]
+FROM [Users] AS [u]
+WHERE [u].[Id] = @__id_0 
+2025-03-05 10:38:47.0639 | WARN | RepositoryLayer.Service.GreetingRL | User with ID 0 not found. 
+2025-03-05 10:38:47.0639 | WARN | BusinessLayer.Service.GreetingBL | User with ID 0 not found. 
+2025-03-05 10:38:47.0639 | INFO | HelloGreetingApplication.Controllers.HelloGreetingController | GET request for user processed successfully. 
+2025-03-05 10:38:47.0639 | INFO | Microsoft.AspNetCore.Mvc.Infrastructure.ObjectResultExecutor | Executing OkObjectResult, writing value of type 'ModelLayer.Model.ResponseModel`1[[RepositoryLayer.Entity.UserEntity, RepositoryLayer, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null]]'. 
+2025-03-05 10:38:47.0639 | INFO | Microsoft.AspNetCore.Mvc.Infrastructure.ControllerActionInvoker | Executed action HelloGreetingApplication.Controllers.HelloGreetingController.GetUserById (HelloGreetingApplication) in 1584.8455ms 
+2025-03-05 10:38:47.0639 | INFO | Microsoft.AspNetCore.Routing.EndpointMiddleware | Executed endpoint 'HelloGreetingApplication.Controllers.HelloGreetingController.GetUserById (HelloGreetingApplication)' 
+2025-03-05 10:38:47.0639 | INFO | Microsoft.AspNetCore.Hosting.Diagnostics | Request finished HTTP/2 GET https://localhost:7089/HelloGreeting/user/0 - - - 200 - application/json;+charset=utf-8 1618.7565ms 
+2025-03-05 10:39:42.7207 | INFO | Microsoft.AspNetCore.Hosting.Diagnostics | Request starting HTTP/2 GET https://localhost:7089/HelloGreeting/user/0 - - 
+2025-03-05 10:39:42.7207 | INFO | Microsoft.AspNetCore.Routing.EndpointMiddleware | Executing endpoint 'HelloGreetingApplication.Controllers.HelloGreetingController.GetUserById (HelloGreetingApplication)' 
+2025-03-05 10:39:42.7342 | INFO | Microsoft.AspNetCore.Mvc.Infrastructure.ControllerActionInvoker | Route matched with {action = "GetUserById", controller = "HelloGreeting"}. Executing controller action with signature Microsoft.AspNetCore.Mvc.IActionResult GetUserById(Int32) on controller HelloGreetingApplication.Controllers.HelloGreetingController (HelloGreetingApplication). 
+2025-03-05 10:39:42.7717 | INFO | HelloGreetingApplication.Controllers.HelloGreetingController | GET request received for user with ID: 0 
+2025-03-05 10:39:42.7717 | INFO | BusinessLayer.Service.GreetingBL | Fetching user with ID: 0 
+2025-03-05 10:39:42.7717 | INFO | RepositoryLayer.Service.GreetingRL | Fetching user with ID: 0 
+2025-03-05 10:39:42.7976 | INFO | Microsoft.EntityFrameworkCore.Infrastructure | Entity Framework Core 6.0.36 initialized 'UserContext' using provider 'Microsoft.EntityFrameworkCore.SqlServer:6.0.36' with options: None 
+2025-03-05 10:39:42.8266 | INFO | Microsoft.EntityFrameworkCore.Database.Command | Executed DbCommand (16ms) [Parameters=[@__id_0='?' (DbType = Int32)], CommandType='Text', CommandTimeout='30']
+SELECT TOP(1) [u].[Id], [u].[FirstName], [u].[LastName]
+FROM [Users] AS [u]
+WHERE [u].[Id] = @__id_0 
+2025-03-05 10:39:42.8266 | WARN | RepositoryLayer.Service.GreetingRL | User with ID 0 not found. 
+2025-03-05 10:39:42.8280 | WARN | BusinessLayer.Service.GreetingBL | User with ID 0 not found. 
+2025-03-05 10:39:42.8280 | INFO | HelloGreetingApplication.Controllers.HelloGreetingController | GET request for user processed successfully. 
+2025-03-05 10:39:42.8280 | INFO | Microsoft.AspNetCore.Mvc.Infrastructure.ObjectResultExecutor | Executing OkObjectResult, writing value of type 'ModelLayer.Model.ResponseModel`1[[RepositoryLayer.Entity.UserEntity, RepositoryLayer, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null]]'. 
+2025-03-05 10:39:42.8280 | INFO | Microsoft.AspNetCore.Mvc.Infrastructure.ControllerActionInvoker | Executed action HelloGreetingApplication.Controllers.HelloGreetingController.GetUserById (HelloGreetingApplication) in 83.858ms 
+2025-03-05 10:39:42.8280 | INFO | Microsoft.AspNetCore.Routing.EndpointMiddleware | Executed endpoint 'HelloGreetingApplication.Controllers.HelloGreetingController.GetUserById (HelloGreetingApplication)' 
+2025-03-05 10:39:42.8280 | INFO | Microsoft.AspNetCore.Hosting.Diagnostics | Request finished HTTP/2 GET https://localhost:7089/HelloGreeting/user/0 - - - 200 - application/json;+charset=utf-8 110.4250ms 
+2025-03-05 10:39:59.0080 | INFO | Microsoft.AspNetCore.Hosting.Diagnostics | Request starting HTTP/2 GET https://localhost:7089/HelloGreeting/user/1 - - 
+2025-03-05 10:39:59.0383 | INFO | Microsoft.AspNetCore.Routing.EndpointMiddleware | Executing endpoint 'HelloGreetingApplication.Controllers.HelloGreetingController.GetUserById (HelloGreetingApplication)' 
+2025-03-05 10:39:59.0475 | INFO | Microsoft.AspNetCore.Mvc.Infrastructure.ControllerActionInvoker | Route matched with {action = "GetUserById", controller = "HelloGreeting"}. Executing controller action with signature Microsoft.AspNetCore.Mvc.IActionResult GetUserById(Int32) on controller HelloGreetingApplication.Controllers.HelloGreetingController (HelloGreetingApplication). 
+2025-03-05 10:39:59.0475 | INFO | HelloGreetingApplication.Controllers.HelloGreetingController | GET request received for user with ID: 1 
+2025-03-05 10:39:59.0475 | INFO | BusinessLayer.Service.GreetingBL | Fetching user with ID: 1 
+2025-03-05 10:39:59.0475 | INFO | RepositoryLayer.Service.GreetingRL | Fetching user with ID: 1 
+2025-03-05 10:39:59.0475 | INFO | Microsoft.EntityFrameworkCore.Infrastructure | Entity Framework Core 6.0.36 initialized 'UserContext' using provider 'Microsoft.EntityFrameworkCore.SqlServer:6.0.36' with options: None 
+2025-03-05 10:39:59.0475 | INFO | Microsoft.EntityFrameworkCore.Database.Command | Executed DbCommand (6ms) [Parameters=[@__id_0='?' (DbType = Int32)], CommandType='Text', CommandTimeout='30']
+SELECT TOP(1) [u].[Id], [u].[FirstName], [u].[LastName]
+FROM [Users] AS [u]
+WHERE [u].[Id] = @__id_0 
+2025-03-05 10:39:59.0841 | INFO | RepositoryLayer.Service.GreetingRL | User with ID 1 found. 
+2025-03-05 10:39:59.0841 | INFO | BusinessLayer.Service.GreetingBL | User with ID 1 found. 
+2025-03-05 10:39:59.0841 | INFO | HelloGreetingApplication.Controllers.HelloGreetingController | GET request for user processed successfully. 
+2025-03-05 10:39:59.0841 | INFO | Microsoft.AspNetCore.Mvc.Infrastructure.ObjectResultExecutor | Executing OkObjectResult, writing value of type 'ModelLayer.Model.ResponseModel`1[[RepositoryLayer.Entity.UserEntity, RepositoryLayer, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null]]'. 
+2025-03-05 10:39:59.0841 | INFO | Microsoft.AspNetCore.Mvc.Infrastructure.ControllerActionInvoker | Executed action HelloGreetingApplication.Controllers.HelloGreetingController.GetUserById (HelloGreetingApplication) in 40.3776ms 
+2025-03-05 10:39:59.0841 | INFO | Microsoft.AspNetCore.Routing.EndpointMiddleware | Executed endpoint 'HelloGreetingApplication.Controllers.HelloGreetingController.GetUserById (HelloGreetingApplication)' 
+2025-03-05 10:39:59.0841 | INFO | Microsoft.AspNetCore.Hosting.Diagnostics | Request finished HTTP/2 GET https://localhost:7089/HelloGreeting/user/1 - - - 200 - application/json;+charset=utf-8 81.5482ms 

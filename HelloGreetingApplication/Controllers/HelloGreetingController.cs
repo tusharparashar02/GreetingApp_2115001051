@@ -27,6 +27,24 @@ namespace HelloGreetingApplication.Controllers
             logger.Info("GET request processed successfully.");
             return Ok(_greetingBL.GetGreetingBL());
         }
+        /// <summary>
+        /// Get method to retrieve a user by ID.
+        /// </summary>
+        /// <param name="id">User ID</param>
+        /// <returns>Response Model with user details</returns>
+        [HttpGet("user/{id}")]
+        public IActionResult GetUserById(int id)
+        {
+            logger.Info($"GET request received for user with ID: {id}");
+            if (id == null)
+            {
+                logger.Warn("User ID is null. Returning NotFound response.");
+                return NotFound(new ResponseModel<string> { Success = false, Message = "User not found" });
+            }
+            var response = _greetingBL.GetUserById(id);
+            logger.Info("GET request for user processed successfully.");
+            return Ok(response);
+        }
 
         /// <summary>
         /// Post method to add the new greeting message.
