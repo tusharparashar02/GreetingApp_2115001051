@@ -1,48 +1,35 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using BusinessLayer.Interface;
 using ModelLayer.Model;
 using NLog;
+using RepositoryLayer.Interface;
 
 namespace BusinessLayer.Service
 {
-    /// <summary>
-    /// Business logic layer for handling greeting messages.
-    /// </summary>
     public class GreetingBL : IGreetingBL
     {
         private static readonly Logger logger = LogManager.GetCurrentClassLogger();
         private string _greetingMessage = "Hello World";
+        private readonly IGreetingRL _greetingRL;
+
+        public GreetingBL(IGreetingRL greetingRL)
+        {
+            _greetingRL = greetingRL;
+        }
 
         /// <summary>
         /// Retrieves the current greeting message with user attributes.
         /// </summary>
         /// <returns>ResponseModel containing the formatted greeting message.</returns>
-        public ResponseModel<string> GetGreetingBL()
+        public ResponseModel<string> GetGreetingBL(string firstName = "", string lastName = "")
         {
             logger.Info("Fetching greeting message.");
 
-            // Splitting _greetingMessage to extract first and last name if available
-            string[] words = _greetingMessage.Split(' ', StringSplitOptions.RemoveEmptyEntries);
-            string firstName = words.Length > 0 ? words[0] : "";
-            string lastName = words.Length > 1 ? words[1] : "";
 
-            string finalGreeting;
-            if (!string.IsNullOrEmpty(firstName))
-            {
-                if (!string.IsNullOrEmpty(lastName))
-                {
-                    finalGreeting = $"Hello, {firstName} {lastName}!";
-                }
-                else
-                {
-                    finalGreeting = $"Hello, {firstName}!";
-                }
-            }
-            else
+            string finalGreeting = firstName + lastName;
+
+            if (string.IsNullOrEmpty(finalGreeting.Trim()))
+
             {
                 finalGreeting = "Hello World!";
             }
@@ -51,7 +38,7 @@ namespace BusinessLayer.Service
             {
                 Success = true,
                 Data = finalGreeting,
-                Message = "Greeting retrieved successfully"
+                Message = $"Hello, {finalGreeting}"
             };
         }
 
@@ -62,14 +49,7 @@ namespace BusinessLayer.Service
         /// <returns>ResponseModel with the newly set greeting message.</returns>
         public ResponseModel<string> AddGreetingBL(RequestModel requestModel)
         {
-            logger.Info($"Adding new greeting with Key: {requestModel.Key}, Value: {requestModel.Value}");
-            _greetingMessage = $"{requestModel.Key} {requestModel.Value}".Trim();
-            return new ResponseModel<string>
-            {
-                Success = true,
-                Data = _greetingMessage,
-                Message = $"Greeting message set successfully"
-            };
+            return _greetingRL.AddGreetingRL(requestModel);
         }
 
         /// <summary>
@@ -79,8 +59,8 @@ namespace BusinessLayer.Service
         /// <returns>ResponseModel confirming the updated greeting message.</returns>
         public ResponseModel<string> UpdateGreetingBL(RequestModel requestModel)
         {
-            logger.Info($"Updating greeting message to: {requestModel.Value}");
-            _greetingMessage = requestModel.Value;
+            logger.Info($"Updating greeting message to: {requestModel.LastName}");
+            _greetingMessage = requestModel.LastName;
             return new ResponseModel<string>
             {
                 Success = true,
@@ -122,4 +102,3 @@ namespace BusinessLayer.Service
         }
     }
 }
-

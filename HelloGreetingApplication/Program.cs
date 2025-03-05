@@ -1,22 +1,33 @@
 using BusinessLayer.Interface;
 using BusinessLayer.Service;
+using Microsoft.EntityFrameworkCore;
 using NLog;
 using NLog.Web;
+using RepositoryLayer.Context;
+using RepositoryLayer.Interface;
+using RepositoryLayer.Service;
 
-var builder = WebApplication.CreateBuilder(args);
 
-// Configure NLog
-builder.Logging.ClearProviders();
-builder.Host.UseNLog();
+
+
 
 var logger = LogManager.GetCurrentClassLogger();
 logger.Info("Application is starting");
 
 try
 {
+    var builder = WebApplication.CreateBuilder(args);
+    var connectionString = builder.Configuration.GetConnectionString("SqlConnections");
+    builder.Services.AddDbContext<UserContext>(options => options.UseSqlServer(connectionString));
     // Add services to the container
     builder.Services.AddScoped<IGreetingBL, GreetingBL>();
+    builder.Services.AddScoped<IGreetingRL, GreetingRL>();
+
     builder.Services.AddControllers();  // Adding controllers to the DI container
+
+    // Configure NLog
+    builder.Logging.ClearProviders();
+    builder.Host.UseNLog();
 
     // Add Swagger to the container
     builder.Services.AddEndpointsApiExplorer();

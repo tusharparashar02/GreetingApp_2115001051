@@ -36,7 +36,7 @@ namespace HelloGreetingApplication.Controllers
         [HttpPost]
         public IActionResult Post(RequestModel requestModel)
         {
-            logger.Info($"POST request received with Key: {requestModel.Key}, Value: {requestModel.Value}");
+            logger.Info($"POST request received with Key: {requestModel.FirstName}, Value: {requestModel.LastName}");
             logger.Info("POST request processed successfully.");
             return Ok(_greetingBL.AddGreetingBL(requestModel));
         }
@@ -49,7 +49,7 @@ namespace HelloGreetingApplication.Controllers
         [HttpPut]
         public IActionResult Put(RequestModel requestModel)
         {
-            logger.Info($"PUT request received to update greeting to: {requestModel.Value}");
+            logger.Info($"PUT request received to update greeting to: {requestModel.LastName}");
             logger.Info("PUT request processed successfully.");
             return Ok(_greetingBL.UpdateGreetingBL(requestModel));
         }
