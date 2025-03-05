@@ -14,7 +14,7 @@ namespace BusinessLayer.Interface
         ResponseModel<string> AddGreetingBL(RequestModel requestModel);
         ResponseModel<string> UpdateGreetingBL(RequestModel requestModel);
         ResponseModel<UserEntity> PartialUpdateGreetingBL(RequestModel requestModel);
-        ResponseModel<string> DeleteGreetingBL();
+        ResponseModel<UserEntity> DeleteGreetingBL(RequestModel requestModel);
 
         ResponseModel<UserEntity> GetUserById(int id);
         ResponseModel<List<UserEntity>> GetAllUsers();

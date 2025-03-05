@@ -130,16 +130,16 @@ namespace BusinessLayer.Service
         /// Deletes the greeting message and resets it to an empty string.
         /// </summary>
         /// <returns>ResponseModel confirming the deletion of the greeting message.</returns>
-        public ResponseModel<string> DeleteGreetingBL()
+        public ResponseModel<UserEntity> DeleteGreetingBL(RequestModel requestModel)
         {
-            logger.Info("Deleting greeting message.");
-            _greetingMessage = "";
-            return new ResponseModel<string>
+            var result = _greetingRL.DeleteGreetingRL(requestModel);
+            if (result == null)
             {
-                Success = true,
-                Data = "",
-                Message = "Greeting deleted successfully"
-            };
+                return new ResponseModel<UserEntity> { Success = false, Message = "User not found", Data = null };
+            }
+
+            logger.Info("Deleting greeting message.");
+            return new ResponseModel<UserEntity> { Success = true, Message = "Message deleted Successfully", Data = result };
         }
     }
 }

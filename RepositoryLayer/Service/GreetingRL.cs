@@ -1,9 +1,5 @@
 ﻿using System;
-using System.Collections.Generic;
 using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using Microsoft.Extensions.Logging;
 using ModelLayer.Model;
 using RepositoryLayer.Context;
 using RepositoryLayer.Entity;
@@ -49,6 +45,7 @@ namespace RepositoryLayer.Service
             {
                 FirstName = requestModel.FirstName,
                 LastName = requestModel.LastName,
+                Message = $"Morning, {final}"
             };
 
             _context.Users.Add(userEntity);
@@ -62,6 +59,7 @@ namespace RepositoryLayer.Service
                 Message = "Greeting message saved successfully"
             };
         }
+
         /// <summary>
         /// Retrieves a user by their unique ID.
         /// </summary>
@@ -115,6 +113,29 @@ namespace RepositoryLayer.Service
 
             logger.Info($"User with ID {requestModel.Id} message updated successfully.");
             return user;
+        }
+
+        /// <summary>
+        /// Deletes a user from the database if the provided ID matches.
+        /// </summary>
+        /// <param name="requestModel">Request model containing the user ID.</param>
+        /// <returns>Deleted user entity if found; otherwise, null.</returns>
+        public UserEntity DeleteGreetingRL(RequestModel requestModel)
+        {
+            logger.Info($"Attempting to delete user with ID: {requestModel.Id}");
+
+            var result = _context.Users.FirstOrDefault(e => e.Id == requestModel.Id);
+            if (result == null)
+            {
+                logger.Warn($"User with ID {requestModel.Id} not found.");
+                return null;
+            }
+
+            _context.Users.Remove(result);
+            _context.SaveChanges();
+
+            logger.Info($"User with ID {requestModel.Id} deleted successfully.");
+            return result;
         }
     }
 }
