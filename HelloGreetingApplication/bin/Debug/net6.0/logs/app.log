@@ -952,3 +952,21 @@ SELECT @@ROWCOUNT;
 2025-03-16 10:17:41.5096 | INFO | Microsoft.AspNetCore.Hosting.Diagnostics | Request finished HTTP/2 GET https://localhost:7089/_vs/browserLink - - - 200 - text/javascript;+charset=UTF-8 100.5355ms 
 2025-03-16 10:17:41.6615 | INFO | Microsoft.AspNetCore.Hosting.Diagnostics | Request starting HTTP/2 GET https://localhost:7089/Swagger/v1/swagger.json - - 
 2025-03-16 10:17:41.6615 | INFO | Microsoft.AspNetCore.Hosting.Diagnostics | Request finished HTTP/2 GET https://localhost:7089/Swagger/v1/swagger.json - - - 200 - application/json;charset=utf-8 14.4150ms 
+2025-03-16 15:55:03.7620 | INFO | HelloGreetingApplication.Program | Application is starting... 
+2025-03-16 15:55:06.7780 | INFO | HelloGreetingApplication.Program | Application started successfully. 
+2025-03-16 15:55:06.8551 | INFO | Microsoft.AspNetCore.DataProtection.KeyManagement.XmlKeyManager | User profile is available. Using 'C:\Users\tusha\AppData\Local\ASP.NET\DataProtection-Keys' as key repository and Windows DPAPI to encrypt keys at rest. 
+2025-03-16 15:55:07.3764 | INFO | Microsoft.Hosting.Lifetime | Now listening on: https://localhost:7089 
+2025-03-16 15:55:07.3764 | INFO | Microsoft.Hosting.Lifetime | Now listening on: http://localhost:5223 
+2025-03-16 15:55:07.4313 | INFO | Microsoft.Hosting.Lifetime | Application started. Press Ctrl+C to shut down. 
+2025-03-16 15:55:07.4313 | INFO | Microsoft.Hosting.Lifetime | Hosting environment: Development 
+2025-03-16 15:55:07.4313 | INFO | Microsoft.Hosting.Lifetime | Content root path: D:\GreetingApp_2115001051\HelloGreetingApplication\ 
+2025-03-16 15:55:08.2444 | INFO | Microsoft.AspNetCore.Hosting.Diagnostics | Request starting HTTP/2 GET https://localhost:7089/Swagger/index.html - - 
+2025-03-16 15:55:09.1431 | INFO | Microsoft.AspNetCore.Hosting.Diagnostics | Request finished HTTP/2 GET https://localhost:7089/Swagger/index.html - - - 200 - text/html;charset=utf-8 902.6535ms 
+2025-03-16 15:55:09.1509 | INFO | Microsoft.AspNetCore.Hosting.Diagnostics | Request starting HTTP/2 GET https://localhost:7089/_framework/aspnetcore-browser-refresh.js - - 
+2025-03-16 15:55:09.1509 | INFO | Microsoft.AspNetCore.Hosting.Diagnostics | Request starting HTTP/2 GET https://localhost:7089/Swagger/index.js - - 
+2025-03-16 15:55:09.1509 | INFO | Microsoft.AspNetCore.Hosting.Diagnostics | Request starting HTTP/2 GET https://localhost:7089/_vs/browserLink - - 
+2025-03-16 15:55:09.1610 | INFO | Microsoft.AspNetCore.Hosting.Diagnostics | Request finished HTTP/2 GET https://localhost:7089/Swagger/index.js - - - 200 - application/javascript;charset=utf-8 10.1765ms 
+2025-03-16 15:55:09.1610 | INFO | Microsoft.AspNetCore.Hosting.Diagnostics | Request finished HTTP/2 GET https://localhost:7089/_framework/aspnetcore-browser-refresh.js - - - 200 12380 application/javascript;+charset=utf-8 22.5454ms 
+2025-03-16 15:55:09.3367 | INFO | Microsoft.AspNetCore.Hosting.Diagnostics | Request finished HTTP/2 GET https://localhost:7089/_vs/browserLink - - - 200 - text/javascript;+charset=UTF-8 185.2565ms 
+2025-03-16 15:55:09.4283 | INFO | Microsoft.AspNetCore.Hosting.Diagnostics | Request starting HTTP/2 GET https://localhost:7089/Swagger/v1/swagger.json - - 
+2025-03-16 15:55:09.4490 | INFO | Microsoft.AspNetCore.Hosting.Diagnostics | Request finished HTTP/2 GET https://localhost:7089/Swagger/v1/swagger.json - - - 200 - application/json;charset=utf-8 20.6367ms 

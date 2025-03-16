@@ -1,4 +1,6 @@
 ﻿using BusinessLayer.Interface;
+using JWT.Service;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using ModelLayer.Model;
 using NLog;
@@ -11,15 +13,26 @@ namespace HelloGreetingApplication.Controllers
     {
         private static readonly Logger logger = LogManager.GetCurrentClassLogger();
         private readonly IUserBL _userBL;
+        private readonly TokenService _jwtService;
 
         /// <summary>
         /// Initializes a new instance of the UserController class.
         /// </summary>
         /// <param name="userBL">Business layer dependency for user operations.</param>
-        public UserController(IUserBL userBL)
+        public UserController(IUserBL userBL, TokenService jwtService)
         {
             _userBL = userBL;
+            _jwtService = jwtService;
         }
+
+
+        [Authorize]
+        [HttpGet]
+        public IActionResult Get()
+        {
+            return Ok("OK");
+        }
+
 
         /// <summary>
         /// Registers a new user in the system.
@@ -29,35 +42,27 @@ namespace HelloGreetingApplication.Controllers
         [HttpPost("register")]
         public IActionResult Register(UserDTO userDTO)
         {
-            try
+            logger.Info("User registration process started.");
+            var result = _userBL.RegisterBL(userDTO);
+
+            if (result == null)
             {
-                logger.Info("User registration process started.");
-                var result = _userBL.RegisterBL(userDTO);
-
-                if (result == null)
-                {
-                    logger.Warn("User already exists.");
-                    return Ok(new ResponseModel<object>
-                    {
-                        Success = false,
-                        Message = "User already present",
-                        Data = null
-                    });
-                }
-
-                logger.Info("User registered successfully.");
+                logger.Warn("User already exists.");
                 return Ok(new ResponseModel<object>
                 {
-                    Success = true,
-                    Message = "User registered",
-                    Data = result
+                    Success = false,
+                    Message = "User already present",
+                    Data = null
                 });
             }
-            catch (Exception ex)
+
+            logger.Info("User registered successfully.");
+            return Ok(new ResponseModel<object>
             {
-                logger.Error(ex, "Error occurred during user registration.");
-                return StatusCode(500, "Internal Server Error");
-            }
+                Success = true,
+                Message = "User registered",
+                Data = result
+            });
         }
 
         /// <summary>
@@ -68,35 +73,33 @@ namespace HelloGreetingApplication.Controllers
         [HttpPost("login")]
         public IActionResult Login(LoginDTO loginDTO)
         {
-            try
+            logger.Info("User login attempt started.");
+            var result = _userBL.LoginBL(loginDTO);
+
+            if (result == null)
             {
-                logger.Info("User login attempt started.");
-                var result = _userBL.LoginBL(loginDTO);
-
-                if (result == null)
+                logger.Warn("User login failed. Invalid credentials.");
+                return Ok(new ResponseModel<object>
                 {
-                    logger.Warn("User login failed. Invalid credentials.");
-                    return Ok(new ResponseModel<object>
-                    {
-                        Success = false,
-                        Message = "Invalid email or password",
-                        Data = null
-                    });
-                }
-
-                logger.Info("User logged in successfully.");
-                return Ok(new ResponseModel<ResponseLoginDTO>
-                {
-                    Success = true,
-                    Message = "User login successfully",
-                    Data = result
+                    Success = false,
+                    Message = "Invalid email or password",
+                    Data = null
                 });
             }
-            catch (Exception ex)
+
+            string token = _jwtService.GenerateToken(loginDTO.Email);
+
+            logger.Info("User logged in successfully.");
+
+            //ResponseModel < ResponseLoginDTO > r=new ResponseModel<ResponseLoginDTO>();
+
+            result.Token = token;
+            return Ok(new ResponseModel<ResponseLoginDTO>
             {
-                logger.Error(ex, "Error occurred during user login.");
-                return StatusCode(500, "Internal Server Error");
-            }
+                Success = true,
+                Message = "User login successfully",
+                Data = result
+            });
         }
 
         /// <summary>
@@ -104,38 +107,32 @@ namespace HelloGreetingApplication.Controllers
         /// </summary>
         /// <param name="forgetDTO">User email for password reset request.</param>
         /// <returns>Response indicating whether email was sent.</returns>
+
+        [Authorize]
         [HttpPost("forget")]
         public IActionResult Forget(ForgetDTO forgetDTO)
         {
-            try
+            logger.Info($"Password reset request received for email: {forgetDTO.Email}");
+            var result = _userBL.ForgetBL(forgetDTO);
+
+            if (!result)
             {
-                logger.Info($"Password reset request received for email: {forgetDTO.Email}");
-                var result = _userBL.ForgetBL(forgetDTO);
-
-                if (!result)
-                {
-                    logger.Warn("User not found for password reset.");
-                    return Ok(new ResponseModel<object>
-                    {
-                        Success = false,
-                        Message = "No user found with this email",
-                        Data = null
-                    });
-                }
-
-                logger.Info("Password reset email sent successfully.");
+                logger.Warn("User not found for password reset.");
                 return Ok(new ResponseModel<object>
                 {
-                    Success = true,
-                    Message = "Password reset email sent successfully",
+                    Success = false,
+                    Message = "No user found with this email",
                     Data = null
                 });
             }
-            catch (Exception ex)
+
+            logger.Info("Password reset email sent successfully.");
+            return Ok(new ResponseModel<object>
             {
-                logger.Error(ex, "Error occurred during password reset request.");
-                return StatusCode(500, "Internal Server Error");
-            }
+                Success = true,
+                Message = "Password reset email sent successfully",
+                Data = null
+            });
         }
 
         /// <summary>
@@ -146,24 +143,16 @@ namespace HelloGreetingApplication.Controllers
         [HttpPost("reset")]
         public IActionResult Reset(ResetDTO resetDTO)
         {
-            try
-            {
-                logger.Info("Password reset request initiated.");
-                // Example: Validate token and update password logic here
+            logger.Info("Password reset request initiated.");
+            // Example: Validate token and update password logic here
 
-                logger.Info("Password reset successfully.");
-                return Ok(new ResponseModel<object>
-                {
-                    Success = true,
-                    Message = "Password reset successfully",
-                    Data = null
-                });
-            }
-            catch (Exception ex)
+            logger.Info("Password reset successfully.");
+            return Ok(new ResponseModel<object>
             {
-                logger.Error(ex, "Error occurred during password reset.");
-                return StatusCode(500, "Internal Server Error");
-            }
+                Success = true,
+                Message = "Password reset successfully",
+                Data = null
+            });
         }
     }
 }

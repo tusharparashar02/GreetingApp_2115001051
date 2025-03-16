@@ -1,27 +1,39 @@
-﻿using System;
+﻿using System.Threading;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.Filters;
-using NLog;
+using Microsoft.Extensions.Logging;
 
 namespace Middleware.GlobalExceptionHandler
 {
-    public class GlobalExceptionHandler : ExceptionFilterAttribute
+    public class GlobalExceptionFilter : ExceptionFilterAttribute
     {
-        private static readonly Logger _logger = LogManager.GetCurrentClassLogger();
+        private readonly ILogger<GlobalExceptionFilter> _logger;
+
+        public GlobalExceptionFilter(ILogger<GlobalExceptionFilter> logger)
+        {
+            _logger = logger;
+        }
 
         public override void OnException(ExceptionContext context)
         {
-            _logger.Error(context.Exception, "Unhandled exception occurred!");
+            // Log the error details
+            _logger.LogError(context.Exception, "An error occurred in the application");
 
-            var errorResponse = ExceptionHandler.CreateErrorResponse(context.Exception);
-
-            int statusCode = context.Exception is ArgumentException ? 400 : 500;
-
-            context.Result = new ObjectResult(errorResponse)
+            // Create an error response object
+            var errorResponse = new
             {
-                StatusCode = statusCode
+                Success = false,
+                Message = "An unexpected error occurred. Please try again later.",
+                Error = context.Exception.Message
             };
 
+            // Return a structured JSON response with a 500 status code
+            context.Result = new ObjectResult(errorResponse)
+            {
+                StatusCode = 500
+            };
+
+            // Mark the exception as handled
             context.ExceptionHandled = true;
         }
     }

@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections.Generic;
 using BusinessLayer.Interface;
 using ModelLayer.Model;
 using RepositoryLayer.Interface;
@@ -31,25 +32,17 @@ namespace BusinessLayer.Service
         /// <returns>Registered user entity or null if already exists.</returns>
         public User RegisterBL(UserDTO userDTO)
         {
-            try
+            logger.Info("Attempting user registration for email: {0}", userDTO.Email);
+            var result = _userRL.RegisterRL(userDTO);
+            if (result == null)
             {
-                logger.Info("Attempting user registration for email: {0}", userDTO.Email);
-                var result = _userRL.RegisterRL(userDTO);
-
-                if (result == null)
-                {
-                    logger.Warn("User registration failed. Email already exists: {0}", userDTO.Email);
-                    return null;
-                }
-
+                logger.Warn("User registration failed. Email already exists: {0}", userDTO.Email);
+            }
+            else
+            {
                 logger.Info("User registered successfully: {0}", userDTO.Email);
-                return result;
             }
-            catch (Exception ex)
-            {
-                logger.Error(ex, "Error occurred during user registration for email: {0}", userDTO.Email);
-                throw new Exception("An error occurred while registering the user.");
-            }
+            return result;
         }
 
         /// <summary>
@@ -59,30 +52,19 @@ namespace BusinessLayer.Service
         /// <returns>ResponseLoginDTO with user details if successful; otherwise, null.</returns>
         public ResponseLoginDTO LoginBL(LoginDTO loginDTO)
         {
-            try
+            logger.Info("User login attempt for email: {0}", loginDTO.Email);
+            string password = loginDTO.Password;
+            var result = _userRL.LoginRL(loginDTO);
+            if (result == null)
             {
-                logger.Info("User login attempt for email: {0}", loginDTO.Email);
-                var result = _userRL.LoginRL(loginDTO);
-
-                if (result == null)
-                {
-                    logger.Warn("Login failed. Credentials not found: {0}", loginDTO.Email);
-                    return null;
-                }
-
-                logger.Info("User login successful: {0}", loginDTO.Email);
-                return new ResponseLoginDTO
-                {
-                    Email = result.Email,
-                    FirstName = result.FirstName,
-                    LastName = result.LastName
-                };
+                logger.Warn("Login failed. credentials not found: {0}", loginDTO.Email);
+                return null;
             }
-            catch (Exception ex)
-            {
-                logger.Error(ex, "Error occurred during user login for email: {0}", loginDTO.Email);
-                throw new Exception("An error occurred while logging in.");
-            }
+
+            logger.Info("User login successful: {0}", loginDTO.Email);
+            return new ResponseLoginDTO { Email = result.Email, FirstName = result.FirstName, LastName = result.LastName };
+
+
         }
 
         /// <summary>
@@ -92,25 +74,17 @@ namespace BusinessLayer.Service
         /// <returns>True if user exists; otherwise, false.</returns>
         public bool ForgetBL(ForgetDTO forgetDTO)
         {
-            try
+            logger.Info("Password reset request for email: {0}", forgetDTO.Email);
+            bool result = _userRL.ForgetRL(forgetDTO);
+            if (!result)
             {
-                logger.Info("Password reset request for email: {0}", forgetDTO.Email);
-                bool result = _userRL.ForgetRL(forgetDTO);
-
-                if (!result)
-                {
-                    logger.Warn("Password reset failed. User not found: {0}", forgetDTO.Email);
-                    return false;
-                }
-
+                logger.Warn("Password reset failed. User not found: {0}", forgetDTO.Email);
+            }
+            else
+            {
                 logger.Info("Password reset request successful for email: {0}", forgetDTO.Email);
-                return true;
             }
-            catch (Exception ex)
-            {
-                logger.Error(ex, "Error occurred during password reset request for email: {0}", forgetDTO.Email);
-                throw new Exception("An error occurred while processing the password reset request.");
-            }
+            return result;
         }
     }
 }
