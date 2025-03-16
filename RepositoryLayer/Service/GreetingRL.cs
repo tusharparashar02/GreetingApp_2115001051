@@ -8,6 +8,7 @@ using NLog;
 
 namespace RepositoryLayer.Service
 {
+    //Users
     public class GreetingRL : IGreetingRL
     {
         private static readonly Logger logger = LogManager.GetCurrentClassLogger();
@@ -48,7 +49,7 @@ namespace RepositoryLayer.Service
                 Message = $"Morning, {final}"
             };
 
-            _context.Users.Add(userEntity);
+            _context.GreetingDB.Add(userEntity);
             _context.SaveChanges();
 
             logger.Info("Greeting message saved successfully.");
@@ -68,7 +69,7 @@ namespace RepositoryLayer.Service
         public UserEntity GetUserById(int id)
         {
             logger.Info($"Fetching user with ID: {id}");
-            var val = _context.Users.FirstOrDefault(x => x.Id == id);
+            var val = _context.GreetingDB.FirstOrDefault(x => x.Id == id);
 
             if (val == null)
             {
@@ -87,7 +88,7 @@ namespace RepositoryLayer.Service
         public List<UserEntity> GetAllUsers()
         {
             logger.Info("Fetching all users from the database.");
-            var result = _context.Users.ToList();
+            var result = _context.GreetingDB.ToList();
             logger.Info("All users fetched successfully.");
             return result;
         }
@@ -101,7 +102,7 @@ namespace RepositoryLayer.Service
         {
             logger.Info($"Updating message for user with ID: {requestModel.Id}");
 
-            var user = _context.Users.FirstOrDefault(e => e.Id == requestModel.Id);
+            var user = _context.GreetingDB.FirstOrDefault(e => e.Id == requestModel.Id);
             if (user == null)
             {
                 logger.Warn($"User with ID {requestModel.Id} not found.");
@@ -124,14 +125,14 @@ namespace RepositoryLayer.Service
         {
             logger.Info($"Attempting to delete user with ID: {requestModel.Id}");
 
-            var result = _context.Users.FirstOrDefault(e => e.Id == requestModel.Id);
+            var result = _context.GreetingDB.FirstOrDefault(e => e.Id == requestModel.Id);
             if (result == null)
             {
                 logger.Warn($"User with ID {requestModel.Id} not found.");
                 return null;
             }
 
-            _context.Users.Remove(result);
+            _context.GreetingDB.Remove(result);
             _context.SaveChanges();
 
             logger.Info($"User with ID {requestModel.Id} deleted successfully.");

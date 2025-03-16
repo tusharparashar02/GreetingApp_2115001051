@@ -493,10 +493,19 @@
           "Microsoft.EntityFrameworkCore": "6.0.36",
           "Microsoft.EntityFrameworkCore.SqlServer": "6.0.36",
           "ModelLayer": "1.0.0",
-          "NLog": "5.4.0"
+          "NLog": "5.4.0",
+          "Security": "1.0.0"
         },
         "runtime": {
           "RepositoryLayer.dll": {
+            "assemblyVersion": "1.0.0",
+            "fileVersion": "1.0.0.0"
+          }
+        }
+      },
+      "Security/1.0.0": {
+        "runtime": {
+          "Security.dll": {
             "assemblyVersion": "1.0.0",
             "fileVersion": "1.0.0.0"
           }
@@ -803,6 +812,11 @@
       "sha512": ""
     },
     "RepositoryLayer/1.0.0": {
+      "type": "project",
+      "serviceable": false,
+      "sha512": ""
+    },
+    "Security/1.0.0": {
       "type": "project",
       "serviceable": false,
       "sha512": ""

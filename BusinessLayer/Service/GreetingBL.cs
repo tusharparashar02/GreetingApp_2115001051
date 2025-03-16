@@ -26,6 +26,10 @@ namespace BusinessLayer.Service
         {
             logger.Info("Fetching greeting message.");
 
+            // Splitting _greetingMessage to extract first and last name if available
+            //string[] words = _greetingMessage.Split(' ', StringSplitOptions.RemoveEmptyEntries);
+            //string firstName = words.Length > 0 ? words[0] : "";
+            //string lastName = words.Length > 1 ? words[1] : "";
 
             string finalGreeting = firstName + lastName;
 
@@ -42,6 +46,9 @@ namespace BusinessLayer.Service
                 Message = $"Hello, {finalGreeting}"
             };
         }
+
+
+
         /// <summary>
         /// Retrieves a user by their unique ID.
         /// </summary>
@@ -63,6 +70,8 @@ namespace BusinessLayer.Service
             return new ResponseModel<UserEntity> { Success = true, Message = "User present", Data = val };
         }
 
+
+
         /// <summary>
         /// Retrieves all users from the database.
         /// </summary>
@@ -81,6 +90,9 @@ namespace BusinessLayer.Service
             logger.Info("All users fetched successfully.");
             return new ResponseModel<List<UserEntity>> { Success = true, Message = "All users", Data = result };
         }
+
+
+
 
         /// <summary>
         /// Adds a new greeting message using the provided request model.
@@ -116,13 +128,13 @@ namespace BusinessLayer.Service
         /// <returns>ResponseModel confirming the partial update.</returns>
         public ResponseModel<UserEntity> PartialUpdateGreetingBL(RequestModel requestModel)
         {
-            logger.Info($"Partially updating greeting message to: {requestModel.Message}");
 
             var val = _greetingRL.PartialUpdateGreetingBL(requestModel);
             if (val == null)
             {
                 return new ResponseModel<UserEntity> { Success = false, Message = "No user of this id is founded", Data = null };
             }
+            logger.Info($"Partially updating greeting message to: {requestModel.Message}");
             return new ResponseModel<UserEntity> { Success = true, Message = "Message is updated", Data = val };
         }
 

@@ -6,12 +6,11 @@ using System.Threading.Tasks;
 
 namespace ModelLayer.Model
 {
-    //SMD Format
-    //Success, message, data
     public class ResponseModel<T>
     {
         public bool Success { get; set; } = false;
+        public T? Data { get; set; }
+
         public string Message { get; set; } = "";
-        public T Data { get; set; } = default(T);
     }
 }

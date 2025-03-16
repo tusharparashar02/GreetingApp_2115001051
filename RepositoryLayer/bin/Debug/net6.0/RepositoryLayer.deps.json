@@ -13,7 +13,8 @@
           "Microsoft.EntityFrameworkCore.SqlServer": "6.0.36",
           "Microsoft.EntityFrameworkCore.Tools": "6.0.36",
           "ModelLayer": "1.0.0",
-          "NLog": "5.4.0"
+          "NLog": "5.4.0",
+          "Security": "1.0.0"
         },
         "runtime": {
           "RepositoryLayer.dll": {}
@@ -516,6 +517,14 @@
             "fileVersion": "1.0.0.0"
           }
         }
+      },
+      "Security/1.0.0": {
+        "runtime": {
+          "Security.dll": {
+            "assemblyVersion": "1.0.0",
+            "fileVersion": "1.0.0.0"
+          }
+        }
       }
     }
   },
@@ -834,6 +843,11 @@
       "hashPath": "system.windows.extensions.4.7.0.nupkg.sha512"
     },
     "ModelLayer/1.0.0": {
+      "type": "project",
+      "serviceable": false,
+      "sha512": ""
+    },
+    "Security/1.0.0": {
       "type": "project",
       "serviceable": false,
       "sha512": ""
