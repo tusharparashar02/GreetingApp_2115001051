@@ -23,6 +23,8 @@
     <ProjectReference Include="..\Email\Email.csproj" />
     <ProjectReference Include="..\JWT\JWT.csproj" />
     <ProjectReference Include="..\Middleware\Middleware.csproj" />
+    <ProjectReference Include="..\RabbitMqConsumer\RabbittMqConsumer.csproj" />
+    <ProjectReference Include="..\RabbitProducer\RabbitProducer.csproj" />
   </ItemGroup>
 
   <ProjectExtensions><VisualStudio><UserProperties appsettings_1json__JsonSchema="" /></VisualStudio></ProjectExtensions>

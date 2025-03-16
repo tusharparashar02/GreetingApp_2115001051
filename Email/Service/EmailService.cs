@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Threading.Tasks;
 using MailKit.Net.Smtp;
 using MimeKit;
 using Microsoft.Extensions.Configuration;
@@ -12,7 +13,7 @@ public class EmailService
         _config = config;
     }
 
-    public void SendEmail(string to, string subject, string body)
+    public async Task SendEmailAsync(string to, string subject, string body)
     {
         try
         {
@@ -23,10 +24,10 @@ public class EmailService
             email.Body = new TextPart("html") { Text = body };
 
             using var smtp = new SmtpClient();
-            smtp.Connect("smtp.gmail.com", 587, MailKit.Security.SecureSocketOptions.StartTls);
-            smtp.Authenticate(_config["SMTP:Username"], _config["SMTP:Password"]);
-            smtp.Send(email);
-            smtp.Disconnect(true);
+            await smtp.ConnectAsync("smtp.gmail.com", 587, MailKit.Security.SecureSocketOptions.StartTls);
+            await smtp.AuthenticateAsync(_config["SMTP:Username"], _config["SMTP:Password"]);
+            await smtp.SendAsync(email);
+            await smtp.DisconnectAsync(true);
 
             Console.WriteLine($"[✔] Email sent successfully to {to}");
         }

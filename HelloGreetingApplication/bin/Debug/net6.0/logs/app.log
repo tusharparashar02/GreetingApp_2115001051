@@ -970,3 +970,26 @@ SELECT @@ROWCOUNT;
 2025-03-16 15:55:09.3367 | INFO | Microsoft.AspNetCore.Hosting.Diagnostics | Request finished HTTP/2 GET https://localhost:7089/_vs/browserLink - - - 200 - text/javascript;+charset=UTF-8 185.2565ms 
 2025-03-16 15:55:09.4283 | INFO | Microsoft.AspNetCore.Hosting.Diagnostics | Request starting HTTP/2 GET https://localhost:7089/Swagger/v1/swagger.json - - 
 2025-03-16 15:55:09.4490 | INFO | Microsoft.AspNetCore.Hosting.Diagnostics | Request finished HTTP/2 GET https://localhost:7089/Swagger/v1/swagger.json - - - 200 - application/json;charset=utf-8 20.6367ms 
+2025-03-16 19:05:35.7570 | INFO | HelloGreetingApplication.Program | Application is starting... 
+2025-03-16 19:05:37.0843 | ERROR | HelloGreetingApplication.Program | Application failed to start due to an exception. System.ArgumentNullException: Value cannot be null. (Parameter 'configuration')
+   at StackExchange.Redis.ConfigurationOptions.DoParse(String configuration, Boolean ignoreUnknown) in /_/src/StackExchange.Redis/ConfigurationOptions.cs:line 938
+   at StackExchange.Redis.ConnectionMultiplexer.Connect(String configuration, TextWriter log) in /_/src/StackExchange.Redis/ConnectionMultiplexer.cs:line 656
+   at Program.<Main>$(String[] args) in D:\GreetingApp_2115001051\HelloGreetingApplication\Program.cs:line 45
+2025-03-16 19:06:50.5118 | INFO | HelloGreetingApplication.Program | Application is starting... 
+2025-03-16 19:07:01.7030 | INFO | HelloGreetingApplication.Program | Application started successfully. 
+2025-03-16 19:07:01.8575 | INFO | Microsoft.AspNetCore.DataProtection.KeyManagement.XmlKeyManager | User profile is available. Using 'C:\Users\tusha\AppData\Local\ASP.NET\DataProtection-Keys' as key repository and Windows DPAPI to encrypt keys at rest. 
+2025-03-16 19:07:02.4515 | INFO | Microsoft.Hosting.Lifetime | Now listening on: https://localhost:7089 
+2025-03-16 19:07:02.4515 | INFO | Microsoft.Hosting.Lifetime | Now listening on: http://localhost:5223 
+2025-03-16 19:07:02.5711 | INFO | Microsoft.Hosting.Lifetime | Application started. Press Ctrl+C to shut down. 
+2025-03-16 19:07:02.5711 | INFO | Microsoft.Hosting.Lifetime | Hosting environment: Development 
+2025-03-16 19:07:02.5711 | INFO | Microsoft.Hosting.Lifetime | Content root path: D:\GreetingApp_2115001051\HelloGreetingApplication\ 
+2025-03-16 19:07:03.5359 | INFO | Microsoft.AspNetCore.Hosting.Diagnostics | Request starting HTTP/2 GET https://localhost:7089/Swagger/index.html - - 
+2025-03-16 19:07:04.2201 | INFO | Microsoft.AspNetCore.Hosting.Diagnostics | Request starting HTTP/2 GET https://localhost:7089/Swagger/index.js - - 
+2025-03-16 19:07:04.2201 | INFO | Microsoft.AspNetCore.Hosting.Diagnostics | Request starting HTTP/2 GET https://localhost:7089/_framework/aspnetcore-browser-refresh.js - - 
+2025-03-16 19:07:04.2233 | INFO | Microsoft.AspNetCore.Hosting.Diagnostics | Request starting HTTP/2 GET https://localhost:7089/_vs/browserLink - - 
+2025-03-16 19:07:04.2201 | INFO | Microsoft.AspNetCore.Hosting.Diagnostics | Request finished HTTP/2 GET https://localhost:7089/Swagger/index.html - - - 200 - text/html;charset=utf-8 691.9488ms 
+2025-03-16 19:07:04.2233 | INFO | Microsoft.AspNetCore.Hosting.Diagnostics | Request finished HTTP/2 GET https://localhost:7089/Swagger/index.js - - - 200 - application/javascript;charset=utf-8 9.6504ms 
+2025-03-16 19:07:04.2459 | INFO | Microsoft.AspNetCore.Hosting.Diagnostics | Request finished HTTP/2 GET https://localhost:7089/_framework/aspnetcore-browser-refresh.js - - - 200 12380 application/javascript;+charset=utf-8 25.7507ms 
+2025-03-16 19:07:04.3803 | INFO | Microsoft.AspNetCore.Hosting.Diagnostics | Request finished HTTP/2 GET https://localhost:7089/_vs/browserLink - - - 200 - text/javascript;+charset=UTF-8 156.9570ms 
+2025-03-16 19:07:04.4803 | INFO | Microsoft.AspNetCore.Hosting.Diagnostics | Request starting HTTP/2 GET https://localhost:7089/Swagger/v1/swagger.json - - 
+2025-03-16 19:07:04.4962 | INFO | Microsoft.AspNetCore.Hosting.Diagnostics | Request finished HTTP/2 GET https://localhost:7089/Swagger/v1/swagger.json - - - 200 - application/json;charset=utf-8 15.9496ms 

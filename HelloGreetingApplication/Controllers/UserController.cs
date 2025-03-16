@@ -5,6 +5,8 @@ using Microsoft.AspNetCore.Mvc;
 using ModelLayer.Model;
 using NLog;
 using Middleware.GlobalExceptionHandler;
+using Org.BouncyCastle.Asn1.Ocsp;
+using RabbitProducer.Service;
 
 namespace HelloGreetingApplication.Controllers
 {
@@ -19,12 +21,14 @@ namespace HelloGreetingApplication.Controllers
         private readonly IUserBL _userBL;
         private readonly TokenService _jwtService;
         private readonly EmailService _emailService;
+        private readonly RabbitMqProducer _rabbitMQProducer;
 
-        public UserController(IUserBL userBL, TokenService jwtService, EmailService emailService)
+        public UserController(IUserBL userBL, TokenService jwtService, EmailService emailService, RabbitMqProducer rabbitMQProducer)
         {
             _userBL = userBL;
             _jwtService = jwtService;
             _emailService = emailService;
+            _rabbitMQProducer = rabbitMQProducer;
         }
 
         //[HttpGet]
@@ -126,7 +130,7 @@ namespace HelloGreetingApplication.Controllers
         /// Sends a password reset email to the user.
         /// </summary>
         [HttpPost("forget")]
-        public IActionResult Forget([FromBody] ForgetDTO forgetDTO)
+        public async Task<IActionResult> Forget([FromBody] ForgetDTO forgetDTO)
         {
             if (!ModelState.IsValid)
             {
@@ -139,6 +143,7 @@ namespace HelloGreetingApplication.Controllers
                 logger.Info($"Password reset request received for email: {forgetDTO.Email}");
 
                 var result = _userBL.ForgetBL(forgetDTO);
+
                 if (!result)
                 {
                     logger.Warn("User not found for password reset.");
@@ -153,10 +158,18 @@ namespace HelloGreetingApplication.Controllers
                 string resetToken = _jwtService.GenerateResetToken(forgetDTO.Email);
                 string resetLink = $"https://localhost:7277/api/user/reset?token={resetToken}";
 
-                _emailService.SendEmail(forgetDTO.Email, "Reset Your Password",
-                    $"Click the link to reset your password: <a href='{resetLink}'>Reset Password</a>");
+                var message = new
+                {
+                    To = forgetDTO.Email,
+                    Subject = "Reset Your Password",
+                    Body = $"Click the link to reset your password: https://localhost:7277/HelloApp/reset-password?token={resetToken}"
+                };
 
-                logger.Info("Password reset email sent successfully.");
+                //await _emailService.SendEmailAsync(forgetDTO.Email, "Reset Your Password",
+                //    $"Click the link to reset your password: <a href='{resetLink}'>Reset Password</a>");
+
+                //logger.Info("Password reset email sent successfully.");
+                _rabbitMQProducer.PublishMessage(message);
                 return Ok(new ResponseModel<object>
                 {
                     Success = true,
@@ -171,10 +184,11 @@ namespace HelloGreetingApplication.Controllers
             }
         }
 
+
         /// <summary>
         /// Resets the user's password after verification.
         /// </summary>
-        [HttpPost("reset")]
+        [HttpPost("reset-password")]
         public IActionResult Reset([FromBody] ResetDTO resetDTO)
         {
             try

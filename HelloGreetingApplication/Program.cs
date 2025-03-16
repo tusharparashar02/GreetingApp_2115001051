@@ -11,6 +11,11 @@ using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.IdentityModel.Tokens;
 using System.Text;
 using JWT.Service;
+using StackExchange.Redis;
+//using RabbitMQProducer.Service;
+using RabbittMqConsumer.Service;
+using RabbitProducer.Service;
+
 
 var logger = LogManager.Setup().LoadConfigurationFromFile("nlog.config").GetCurrentClassLogger();
 logger.Info("Application is starting...");
@@ -19,10 +24,29 @@ try
 {
     var builder = WebApplication.CreateBuilder(args);
 
+
+    //Rabbit
+    //builder.Services.AddSingleton<RabbitMqConsumer>();
+    builder.Services.AddSingleton<RabbitMqConsumer>();
+    builder.Services.AddSingleton<RabbitMqProducer>();
+    //builder.Services.AddScoped<RabbitMqConsumer>();
+
+
+
     // Add services to the container.
     var connectionString = builder.Configuration.GetConnectionString("SqlConnections");
     builder.Services.AddDbContext<UserContext>(options => options.UseSqlServer(connectionString));
 
+    //Redis
+    builder.Services.AddScoped<RedisCache>();
+
+    // ? Redis Connection
+    var redisConfig = builder.Configuration.GetSection("Redis:ConnectionString").Value;
+    builder.Services.AddSingleton<IConnectionMultiplexer>(ConnectionMultiplexer.Connect(redisConfig));
+
+
+    //Email
+    builder.Services.AddSingleton<EmailService>();
     builder.Services.AddScoped<IGreetingBL, GreetingBL>();
     builder.Services.AddScoped<IGreetingRL, GreetingRL>();
     builder.Services.AddScoped<IUserBL, UserBL>();
@@ -70,14 +94,19 @@ try
     //Exception
     builder.Services.AddControllers(options =>
     {
-        options.Filters.Add<GlobalExceptionFilter>(); // Register global exception filter
+        options.Filters.Add<GlobalExceptionHandler>(); // Register global exception filter
     });
+    // Add other services
+    builder.Services.AddScoped<GlobalExceptionHandler>();
 
     // Configure NLog
     builder.Logging.ClearProviders();
     builder.Host.UseNLog();
 
     var app = builder.Build();
+
+    var rabbitMqConsumer = app.Services.GetRequiredService<RabbitMqConsumer>();
+    Task.Run(() => rabbitMqConsumer.StartListeningAsync()); // Ensures it runs without blocking the app
 
     app.UseSwagger();
     app.UseSwaggerUI();

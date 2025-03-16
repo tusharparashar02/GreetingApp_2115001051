@@ -16,14 +16,16 @@ namespace RepositoryLayer.Service
     {
         private static readonly Logger logger = LogManager.GetCurrentClassLogger();
         private readonly UserContext _context;
+        RedisCache _cacheService;
 
         /// <summary>
         /// Initializes a new instance of the UserRL class.
         /// </summary>
         /// <param name="context">Database context for user entity.</param>
-        public UserRL(UserContext context)
+        public UserRL(UserContext context, RedisCache cacheService)
         {
             _context = context;
+            //_cacheService = cacheService;
         }
 
         /// <summary>
