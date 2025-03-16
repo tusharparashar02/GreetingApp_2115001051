@@ -126,5 +126,15 @@ namespace RepositoryLayer.Service
                 throw new Exception("An error occurred while processing the password reset request.");
             }
         }
+        public bool UpdateUserPassword(string email, ResetDTO resetDTO)
+        {
+            var user = _context.Users.FirstOrDefault(e => e.Email == email);
+            if (user == null) return false;
+
+            user.Password = PasswordHelper.HashPassword(resetDTO.Password);
+            _context.Users.Update(user);
+            _context.SaveChanges();
+            return true;
+        }
     }
 }

@@ -14,5 +14,6 @@ namespace BusinessLayer.Interface
         ResponseLoginDTO LoginBL(LoginDTO loginDTO);
 
         bool ForgetBL(ForgetDTO forgetDTO);
+        bool UpdateUserPassword(string email, ResetDTO resetDTO);
     }
 }

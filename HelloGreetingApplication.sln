@@ -17,6 +17,8 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Security", "Security\Securi
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "JWT", "JWT\JWT.csproj", "{48AFD9D3-649C-4048-88D6-F69EA9F568C6}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Email", "Email\Email.csproj", "{FCBCE23A-84A4-43DB-97B2-A84D439A716F}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -51,6 +53,10 @@ Global
 		{48AFD9D3-649C-4048-88D6-F69EA9F568C6}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{48AFD9D3-649C-4048-88D6-F69EA9F568C6}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{48AFD9D3-649C-4048-88D6-F69EA9F568C6}.Release|Any CPU.Build.0 = Release|Any CPU
+		{FCBCE23A-84A4-43DB-97B2-A84D439A716F}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{FCBCE23A-84A4-43DB-97B2-A84D439A716F}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{FCBCE23A-84A4-43DB-97B2-A84D439A716F}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{FCBCE23A-84A4-43DB-97B2-A84D439A716F}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

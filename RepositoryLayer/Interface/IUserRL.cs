@@ -13,5 +13,6 @@ namespace RepositoryLayer.Interface
         Entity.User RegisterRL(UserDTO userDTO);
         User LoginRL(LoginDTO loginDTO);
         bool ForgetRL(ForgetDTO forgetDTO);
+        bool UpdateUserPassword(string email, ResetDTO resetDTO);
     }
 }

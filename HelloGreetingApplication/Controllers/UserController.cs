@@ -4,6 +4,7 @@ using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using ModelLayer.Model;
 using NLog;
+using Org.BouncyCastle.Asn1.Ocsp;
 
 namespace HelloGreetingApplication.Controllers
 {
@@ -14,31 +15,27 @@ namespace HelloGreetingApplication.Controllers
         private static readonly Logger logger = LogManager.GetCurrentClassLogger();
         private readonly IUserBL _userBL;
         private readonly TokenService _jwtService;
+        private readonly EmailService _emailService;
 
         /// <summary>
         /// Initializes a new instance of the UserController class.
         /// </summary>
-        /// <param name="userBL">Business layer dependency for user operations.</param>
-        public UserController(IUserBL userBL, TokenService jwtService)
+        public UserController(IUserBL userBL, TokenService jwtService, EmailService emailService)
         {
             _userBL = userBL;
             _jwtService = jwtService;
+            _emailService = emailService;
         }
 
-
-        [Authorize]
         [HttpGet]
         public IActionResult Get()
         {
             return Ok("OK");
         }
 
-
         /// <summary>
         /// Registers a new user in the system.
         /// </summary>
-        /// <param name="userDTO">User details for registration.</param>
-        /// <returns>Response with registration status.</returns>
         [HttpPost("register")]
         public IActionResult Register(UserDTO userDTO)
         {
@@ -68,8 +65,6 @@ namespace HelloGreetingApplication.Controllers
         /// <summary>
         /// Authenticates a user and logs them in.
         /// </summary>
-        /// <param name="loginDTO">Login credentials.</param>
-        /// <returns>Response with authentication status.</returns>
         [HttpPost("login")]
         public IActionResult Login(LoginDTO loginDTO)
         {
@@ -78,7 +73,7 @@ namespace HelloGreetingApplication.Controllers
 
             if (result == null)
             {
-                logger.Warn("User login failed. Invalid credentials.");
+                logger.Warn("Invalid login credentials.");
                 return Ok(new ResponseModel<object>
                 {
                     Success = false,
@@ -88,16 +83,13 @@ namespace HelloGreetingApplication.Controllers
             }
 
             string token = _jwtService.GenerateToken(loginDTO.Email);
+            result.Token = token;
 
             logger.Info("User logged in successfully.");
-
-            //ResponseModel < ResponseLoginDTO > r=new ResponseModel<ResponseLoginDTO>();
-
-            result.Token = token;
             return Ok(new ResponseModel<ResponseLoginDTO>
             {
                 Success = true,
-                Message = "User login successfully",
+                Message = "User login successful",
                 Data = result
             });
         }
@@ -105,14 +97,16 @@ namespace HelloGreetingApplication.Controllers
         /// <summary>
         /// Sends a password reset email to the user.
         /// </summary>
-        /// <param name="forgetDTO">User email for password reset request.</param>
-        /// <returns>Response indicating whether email was sent.</returns>
-
-        [Authorize]
         [HttpPost("forget")]
         public IActionResult Forget(ForgetDTO forgetDTO)
         {
             logger.Info($"Password reset request received for email: {forgetDTO.Email}");
+
+            if (string.IsNullOrEmpty(forgetDTO.Email))
+            {
+                return BadRequest(new { message = "Email is required." });
+            }
+
             var result = _userBL.ForgetBL(forgetDTO);
 
             if (!result)
@@ -126,33 +120,71 @@ namespace HelloGreetingApplication.Controllers
                 });
             }
 
-            logger.Info("Password reset email sent successfully.");
-            return Ok(new ResponseModel<object>
+            string resetToken = _jwtService.GenerateResetToken(forgetDTO.Email);
+            string resetLink = $"https://localhost:7277/api/user/reset?token={resetToken}";
+
+            // Send email synchronously
+            try
             {
-                Success = true,
-                Message = "Password reset email sent successfully",
-                Data = null
-            });
+                _emailService.SendEmail(forgetDTO.Email, "Reset Your Password",
+                    $"Click the link to reset your password: <a href='{resetLink}'>Reset Password</a>");
+
+                logger.Info("Password reset email sent successfully.");
+                return Ok(new ResponseModel<object>
+                {
+                    Success = true,
+                    Message = "Password reset email sent successfully",
+                    Data = null
+                });
+            }
+            catch (Exception ex)
+            {
+                logger.Error($"Error sending email: {ex.Message}");
+                return StatusCode(500, new ResponseModel<object>
+                {
+                    Success = false,
+                    Message = "Failed to send password reset email",
+                    Data = null
+                });
+            }
         }
 
         /// <summary>
         /// Resets the user's password after verification.
         /// </summary>
-        /// <param name="resetDTO">Token and new password details.</param>
-        /// <returns>Response indicating password reset success.</returns>
         [HttpPost("reset")]
         public IActionResult Reset(ResetDTO resetDTO)
         {
-            logger.Info("Password reset request initiated.");
-            // Example: Validate token and update password logic here
-
-            logger.Info("Password reset successfully.");
-            return Ok(new ResponseModel<object>
+            try
             {
-                Success = true,
-                Message = "Password reset successfully",
-                Data = null
-            });
+                // Manually get token from query parameters
+                string token = HttpContext.Request.Query["token"];
+
+                if (string.IsNullOrEmpty(token) || string.IsNullOrEmpty(resetDTO.Password))
+                {
+                    return BadRequest(new { message = "Token and new password are required." });
+                }
+
+                // Validate the token
+                var email = _jwtService.ValidateResetToken(token);
+                if (email == null)
+                {
+                    return Unauthorized(new { message = "Invalid or expired token." });
+                }
+
+                // Update the password in the database
+                bool updateSuccess = _userBL.UpdateUserPassword(email, resetDTO);
+                if (!updateSuccess)
+                {
+                    return BadRequest(new { message = "Failed to update password." });
+                }
+
+                return Ok(new { message = "Password changed successfully!" });
+            }
+            catch (Exception ex)
+            {
+                return BadRequest(new { message = "Error occurred while resetting password", error = ex.Message });
+            }
         }
     }
 }

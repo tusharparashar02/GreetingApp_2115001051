@@ -20,6 +20,7 @@
 
   <ItemGroup>
     <ProjectReference Include="..\BusinessLayer\BusinessLayer.csproj" />
+    <ProjectReference Include="..\Email\Email.csproj" />
     <ProjectReference Include="..\JWT\JWT.csproj" />
     <ProjectReference Include="..\Middleware\Middleware.csproj" />
   </ItemGroup>

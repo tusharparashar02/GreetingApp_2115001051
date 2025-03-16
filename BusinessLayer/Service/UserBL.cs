@@ -86,5 +86,9 @@ namespace BusinessLayer.Service
             }
             return result;
         }
+        public bool UpdateUserPassword(string email, ResetDTO resetDTO)
+        {
+            return _userRL.UpdateUserPassword(email, resetDTO);
+        }
     }
 }
