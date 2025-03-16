@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections.Generic;
 using BusinessLayer.Interface;
 using ModelLayer.Model;
 using NLog;
@@ -10,7 +11,6 @@ namespace BusinessLayer.Service
     public class GreetingBL : IGreetingBL
     {
         private static readonly Logger logger = LogManager.GetCurrentClassLogger();
-        private string _greetingMessage = "Hello World";
         private readonly IGreetingRL _greetingRL;
 
         public GreetingBL(IGreetingRL greetingRL)
@@ -26,15 +26,8 @@ namespace BusinessLayer.Service
         {
             logger.Info("Fetching greeting message.");
 
-            // Splitting _greetingMessage to extract first and last name if available
-            //string[] words = _greetingMessage.Split(' ', StringSplitOptions.RemoveEmptyEntries);
-            //string firstName = words.Length > 0 ? words[0] : "";
-            //string lastName = words.Length > 1 ? words[1] : "";
-
-            string finalGreeting = firstName + lastName;
-
-            if (string.IsNullOrEmpty(finalGreeting.Trim()))
-
+            string finalGreeting = (firstName + " " + lastName).Trim();
+            if (string.IsNullOrEmpty(finalGreeting))
             {
                 finalGreeting = "Hello World!";
             }
@@ -47,111 +40,100 @@ namespace BusinessLayer.Service
             };
         }
 
-
-
         /// <summary>
-        /// Retrieves a user by their unique ID.
+        /// Retrieves a greeting by its unique ID.
         /// </summary>
-        /// <param name="id">The unique identifier of the user.</param>
-        /// <returns>ResponseModel containing the user entity if found; otherwise, an error message.</returns>
-        public ResponseModel<UserEntity> GetUserById(int id)
+        public ResponseModel<GreetingEntity> GetGreetingById(int id)
         {
-            logger.Info($"Fetching user with ID: {id}");
+            logger.Info($"Fetching greeting with ID: {id}");
 
-            var val = _greetingRL.GetUserById(id);
-
+            var val = _greetingRL.GetGreetingById(id);
             if (val == null)
             {
-                logger.Warn($"User with ID {id} not found.");
-                return new ResponseModel<UserEntity> { Success = false, Message = "User not found", Data = null };
+                logger.Warn($"Greeting with ID {id} not found.");
+                return new ResponseModel<GreetingEntity> { Success = false, Message = "Greeting not found", Data = null };
             }
 
-            logger.Info($"User with ID {id} found.");
-            return new ResponseModel<UserEntity> { Success = true, Message = "User present", Data = val };
+            logger.Info($"Greeting with ID {id} found.");
+            return new ResponseModel<GreetingEntity> { Success = true, Message = "Greeting found", Data = val };
         }
 
-
-
         /// <summary>
-        /// Retrieves all users from the database.
+        /// Retrieves all greetings from the database.
         /// </summary>
-        /// <returns>ResponseModel containing the list of all users.</returns>
-        public ResponseModel<List<UserEntity>> GetAllUsers()
+        public ResponseModel<List<GreetingEntity>> GetAllGreetings(int userId)
         {
-            logger.Info("Fetching all users.");
-            var result = _greetingRL.GetAllUsers();
+            logger.Info("Fetching all greetings.");
+            var result = _greetingRL.GetAllGreetings(userId);
 
             if (result.Count < 1)
             {
-                logger.Warn("No users found in the database.");
-                return new ResponseModel<List<UserEntity>> { Success = true, Message = "No data found" };
+                logger.Warn("No greetings found in the database.");
+                return new ResponseModel<List<GreetingEntity>> { Success = false, Message = "No greetings found" };
             }
 
-            logger.Info("All users fetched successfully.");
-            return new ResponseModel<List<UserEntity>> { Success = true, Message = "All users", Data = result };
+            logger.Info("All greetings fetched successfully.");
+            return new ResponseModel<List<GreetingEntity>> { Success = true, Message = "All greetings retrieved", Data = result };
         }
-
-
-
 
         /// <summary>
         /// Adds a new greeting message using the provided request model.
         /// </summary>
-        /// <param name="requestModel">Request model containing the key and value for the greeting.</param>
-        /// <returns>ResponseModel with the newly set greeting message.</returns>
-        public ResponseModel<string> AddGreetingBL(RequestModel requestModel)
+        public ResponseModel<string> AddGreetingBL(RequestModel requestModel, int userId)
         {
-            return _greetingRL.AddGreetingRL(requestModel);
+            return _greetingRL.AddGreetingRL(requestModel, userId);
         }
 
         /// <summary>
         /// Updates the greeting message with a new value.
         /// </summary>
-        /// <param name="requestModel">Request model containing the updated greeting message.</param>
-        /// <returns>ResponseModel confirming the updated greeting message.</returns>
-        public ResponseModel<string> UpdateGreetingBL(RequestModel requestModel)
+        public ResponseModel<GreetingEntity> UpdateGreetingBL(RequestModel requestModel, int userId)
         {
-            logger.Info($"Updating greeting message to: {requestModel.LastName}");
-            _greetingMessage = requestModel.LastName;
-            return new ResponseModel<string>
+            logger.Info($"Updating greeting message for user ID: {userId}");
+            var updatedGreeting = _greetingRL.UpdateGreeting(requestModel, userId);
+
+            if (updatedGreeting == null)
+            {
+                return new ResponseModel<GreetingEntity> { Success = false, Message = "Greeting update failed", Data = null };
+            }
+
+            return new ResponseModel<GreetingEntity>
             {
                 Success = true,
-                Data = _greetingMessage,
-                Message = "Greeting message updated successfully"
+                Data = updatedGreeting,
+                Message = "Greeting updated successfully"
             };
         }
 
         /// <summary>
         /// Partially updates the greeting message with a new value.
         /// </summary>
-        /// <param name="requestModel">The new greeting message to update partially.</param>
-        /// <returns>ResponseModel confirming the partial update.</returns>
-        public ResponseModel<UserEntity> PartialUpdateGreetingBL(RequestModel requestModel)
+        public ResponseModel<GreetingEntity> PartialUpdateGreetingBL(RequestModel requestModel, int userId)
         {
+            var updatedGreeting = _greetingRL.UpdateGreetingMessage(requestModel, userId);
 
-            var val = _greetingRL.PartialUpdateGreetingBL(requestModel);
-            if (val == null)
+            if (updatedGreeting == null)
             {
-                return new ResponseModel<UserEntity> { Success = false, Message = "No user of this id is founded", Data = null };
+                return new ResponseModel<GreetingEntity> { Success = false, Message = "No greeting found for this user", Data = null };
             }
+
             logger.Info($"Partially updating greeting message to: {requestModel.Message}");
-            return new ResponseModel<UserEntity> { Success = true, Message = "Message is updated", Data = val };
+            return new ResponseModel<GreetingEntity> { Success = true, Message = "Greeting updated successfully", Data = updatedGreeting };
         }
 
         /// <summary>
-        /// Deletes the greeting message and resets it to an empty string.
+        /// Deletes a greeting message.
         /// </summary>
-        /// <returns>ResponseModel confirming the deletion of the greeting message.</returns>
-        public ResponseModel<UserEntity> DeleteGreetingBL(RequestModel requestModel)
+        public ResponseModel<GreetingEntity> DeleteGreetingBL(RequestModel requestModel, int userId)
         {
-            var result = _greetingRL.DeleteGreetingRL(requestModel);
+            var result = _greetingRL.DeleteGreetingRL(requestModel, userId);
             if (result == null)
             {
-                return new ResponseModel<UserEntity> { Success = false, Message = "User not found", Data = null };
+                return new ResponseModel<GreetingEntity> { Success = false, Message = "Greeting not found", Data = null };
             }
 
             logger.Info("Deleting greeting message.");
-            return new ResponseModel<UserEntity> { Success = true, Message = "Message deleted Successfully", Data = result };
+            return new ResponseModel<GreetingEntity> { Success = true, Message = "Greeting deleted successfully", Data = result };
         }
     }
 }

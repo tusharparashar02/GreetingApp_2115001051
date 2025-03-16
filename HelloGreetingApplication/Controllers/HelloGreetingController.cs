@@ -3,6 +3,9 @@ using ModelLayer.Model;
 using NLog;
 using BusinessLayer.Interface;
 using Microsoft.AspNetCore.Authorization;
+using System.Security.Claims;
+using Middleware.GlobalExceptionHandler;
+
 namespace HelloGreetingApplication.Controllers
 {
     [ApiController]
@@ -11,123 +14,150 @@ namespace HelloGreetingApplication.Controllers
     {
         private readonly IGreetingBL _greetingBL;
         private static readonly Logger logger = LogManager.GetCurrentClassLogger();
+        //static int userId;
 
         public HelloGreetingController(IGreetingBL greetingBL)
         {
             _greetingBL = greetingBL;
         }
 
-        /// <summary>
-        /// Get method to get the greeting message.
-        /// </summary>
-        /// <returns>Response Model with greeting message</returns>
-        [Authorize]
-        [HttpGet]
-        public IActionResult Get()
-        {
-            logger.Info("GET request received for greeting message.");
-            logger.Info("GET request processed successfully.");
-            return Ok(_greetingBL.GetGreetingBL());
-        }
-
-
-
-        /// <summary>
-        /// Get method to retrieve a user by ID.
-        /// </summary>
-        /// <param name="id">User ID</param>
-        /// <returns>Response Model with user details</returns>
         [Authorize]
         [HttpGet("user/{id}")]
         public IActionResult GetUserById(int id)
         {
-            logger.Info($"GET request received for user with ID: {id}");
-            if (id == null)
+            try
             {
-                logger.Warn("User ID is null. Returning NotFound response.");
-                return NotFound(new ResponseModel<string> { Success = false, Message = "User not found" });
+                logger.Info($"GET request received for user with ID: {id}");
+                var response = _greetingBL.GetGreetingById(id);
+                return Ok(response);
             }
-            var response = _greetingBL.GetUserById(id);
-            logger.Info("GET request for user processed successfully.");
-            return Ok(response);
+            catch (Exception ex)
+            {
+                logger.Error(ex, "Exception in GetUserById");
+                return BadRequest(ExceptionHandler.CreateErrorResponse(ex));
+            }
         }
 
-
-        /// <summary>
-        /// Get method to retrieve all users.
-        /// </summary>
-        /// <returns>Response Model with list of users</returns>
         [Authorize]
-        [HttpGet("users")]
+        [HttpGet]
         public IActionResult GetAllUsers()
         {
-            logger.Info("GET request received to fetch all users.");
-            var response = _greetingBL.GetAllUsers();
-            logger.Info("GET request for all users processed successfully.");
-            return Ok(response);
+            try
+            {
+                logger.Info("GET request received to fetch all users.");
+                int userId = GetUserId();
+                var response = _greetingBL.GetAllGreetings(userId);
+                return Ok(response);
+            }
+            catch (Exception ex)
+            {
+                logger.Error(ex, "Exception in GetAllUsers");
+                return BadRequest(ExceptionHandler.CreateErrorResponse(ex));
+            }
         }
-
-
-        /// <summary>
-        /// Post method to add the new greeting message.
-        /// </summary>
-        /// <param name="requestModel">Request Model</param>
-        /// <returns>Response Model with added greeting message</returns>
 
         [Authorize]
         [HttpPost]
-        public IActionResult Post(RequestModel requestModel)
+        public IActionResult Post([FromBody] RequestModel requestModel)
         {
-            logger.Info($"POST request received with Key: {requestModel.FirstName} , Value:  {requestModel.LastName}");
-            logger.Info("POST request processed successfully.");
-            _greetingBL.GetGreetingBL(requestModel.FirstName, requestModel.LastName);
-            return Ok(_greetingBL.AddGreetingBL(requestModel));
+            try
+            {
+                int userId = GetUserId();
+                logger.Info($"POST request received to add greeting: {requestModel.FirstName} {requestModel.LastName}");
+                var response = _greetingBL.AddGreetingBL(requestModel, userId);
+                return Ok(response);
+            }
+            catch (Exception ex)
+            {
+                logger.Error(ex, "Exception in Post");
+                return BadRequest(ExceptionHandler.CreateErrorResponse(ex));
+            }
         }
 
-        /// <summary>
-        /// Put method to change the greeting method.
-        /// </summary>
-        /// <param name="requestModel">Request Model</param>
-        /// <returns>Response Model with updated greeting message</returns>
-        /// 
         [Authorize]
         [HttpPut]
-        public IActionResult Put(RequestModel requestModel)
+        public IActionResult Put([FromBody] RequestModel requestModel)
         {
-            logger.Info($"PUT request received to update greeting to: {requestModel.LastName}");
-            logger.Info("PUT request processed successfully.");
-            return Ok(_greetingBL.UpdateGreetingBL(requestModel));
+            try
+            {
+                int userId = GetUserId();
+                logger.Info($"PUT request received to update greeting: {requestModel.LastName}");
+                var response = _greetingBL.UpdateGreetingBL(requestModel, userId);
+                return Ok(response);
+            }
+            catch (Exception ex)
+            {
+                logger.Error(ex, "Exception in Put");
+                return BadRequest(ExceptionHandler.CreateErrorResponse(ex));
+            }
         }
 
-        /// <summary>
-        /// Patch method to update the single change in greeting message.
-        /// </summary>
-        /// <param name="requestModel">New message value will be update</param>
-        /// <returns>Response Model with partially updated greeting message</returns>
-        /// 
         [Authorize]
         [HttpPatch]
-        public IActionResult Patch(RequestModel requestModel)
+        public IActionResult Patch([FromBody] RequestModel requestModel)
         {
-            logger.Info($"PATCH request received to update greeting to: {requestModel.Message}");
-            logger.Info("PATCH request processed successfully.");
-            return Ok(_greetingBL.PartialUpdateGreetingBL(requestModel));
+            try
+            {
+                int userId = GetUserId();
+                logger.Info($"PATCH request received to update greeting: {requestModel.Message}");
+                var response = _greetingBL.PartialUpdateGreetingBL(requestModel, userId);
+                return Ok(response);
+            }
+            catch (Exception ex)
+            {
+                logger.Error(ex, "Exception in Patch");
+                return BadRequest(ExceptionHandler.CreateErrorResponse(ex));
+            }
         }
-
-        /// <summary>
-        /// Delete method to delete the greeting message.
-        /// </summary>
-        /// <param name="requestModel">to delete message from repo</param>
-        /// <returns>Response Model confirming deletion</returns>
-        /// 
 
         [Authorize]
         [HttpDelete]
-        public IActionResult Delete(RequestModel requestModel)
+        public IActionResult Delete([FromBody] RequestModel requestModel)
         {
-            logger.Info("DELETE request received to remove the greeting message.");
-            logger.Info("DELETE request processed successfully.");
-            return Ok(_greetingBL.DeleteGreetingBL(requestModel));
+            try
+            {
+                int userId = GetUserId();
+                logger.Info("DELETE request received to remove the greeting message.");
+                var response = _greetingBL.DeleteGreetingBL(requestModel, userId);
+                return Ok(response);
+            }
+            catch (Exception ex)
+            {
+                logger.Error(ex, "Exception in Delete");
+                return BadRequest(ExceptionHandler.CreateErrorResponse(ex));
+            }
+        }
+
+        private int GetUserId()
+        {
+            try
+            {
+
+                var userIdClaims = User.Claims
+                    .Where(c => c.Type == "http://schemas.xmlsoap.org/ws/2005/05/identity/claims/nameidentifier")
+                    .Select(c => c.Value)
+                    .ToList();
+
+                if (!userIdClaims.Any())
+                {
+                    throw new Exception("User ID claim is missing in the JWT.");
+                }
+
+                foreach (var claim in userIdClaims)
+                {
+                    if (int.TryParse(claim, out int userId))
+                    {
+                        //Console.WriteLine($"Extracted Valid User ID: {userId}");
+                        return userId;
+                    }
+                }
+                throw new FormatException($"No valid integer User ID found in claims: {string.Join(", ", userIdClaims)}");
+            }
+            catch (Exception ex)
+            {
+                logger.Error(ex, "Exception in GetUserId");
+                throw;
+            }
         }
     }
 }

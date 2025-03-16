@@ -10,8 +10,8 @@ namespace RepositoryLayer.Context
 {
     public class UserContext : DbContext
     {
-        public virtual DbSet<User> Users { get; set; }
-        public virtual DbSet<Entity.UserEntity> GreetingDB { get; set; }
+        public virtual DbSet<UserEntity> Users { get; set; }
+        public virtual DbSet<Entity.GreetingEntity> Greetings { get; set; }
 
         public UserContext(DbContextOptions<UserContext> options) : base(options) { }
     }

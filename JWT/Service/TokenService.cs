@@ -19,11 +19,13 @@ namespace JWT.Service
             _audience = configuration["Jwt:Audience"];
         }
 
-        public string GenerateToken(string email)
+        public string GenerateToken(int userId, string email)
         {
+            Console.WriteLine(userId + ".................................");
             var claims = new[]
             {
                 new Claim(JwtRegisteredClaimNames.Sub, email),
+                new Claim("http://schemas.xmlsoap.org/ws/2005/05/identity/claims/nameidentifier", userId.ToString()),  // Added User ID claim
                 new Claim(JwtRegisteredClaimNames.Jti, Guid.NewGuid().ToString())
             };
 

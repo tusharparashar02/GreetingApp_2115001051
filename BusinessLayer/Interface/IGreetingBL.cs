@@ -1,8 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+﻿using System.Collections.Generic;
 using ModelLayer.Model;
 using RepositoryLayer.Entity;
 
@@ -10,13 +6,18 @@ namespace BusinessLayer.Interface
 {
     public interface IGreetingBL
     {
-        ResponseModel<string> GetGreetingBL(string FirstName = "", string LastName = "");
-        ResponseModel<string> AddGreetingBL(RequestModel requestModel);
-        ResponseModel<string> UpdateGreetingBL(RequestModel requestModel);
-        ResponseModel<UserEntity> PartialUpdateGreetingBL(RequestModel requestModel);
-        ResponseModel<UserEntity> DeleteGreetingBL(RequestModel requestModel);
+        ResponseModel<string> GetGreetingBL(string firstName = "", string lastName = "");
 
-        ResponseModel<UserEntity> GetUserById(int id);
-        ResponseModel<List<UserEntity>> GetAllUsers();
+        ResponseModel<string> AddGreetingBL(RequestModel requestModel, int userId);
+
+        ResponseModel<GreetingEntity> UpdateGreetingBL(RequestModel requestModel, int userId);
+
+        ResponseModel<GreetingEntity> PartialUpdateGreetingBL(RequestModel requestModel, int userId);
+
+        ResponseModel<GreetingEntity> DeleteGreetingBL(RequestModel requestModel, int userId);
+
+        ResponseModel<GreetingEntity> GetGreetingById(int id);
+
+        ResponseModel<List<GreetingEntity>> GetAllGreetings(int userId);
     }
 }

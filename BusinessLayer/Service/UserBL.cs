@@ -30,7 +30,7 @@ namespace BusinessLayer.Service
         /// </summary>
         /// <param name="userDTO">User details for registration.</param>
         /// <returns>Registered user entity or null if already exists.</returns>
-        public User RegisterBL(UserDTO userDTO)
+        public UserEntity RegisterBL(UserDTO userDTO)
         {
             logger.Info("Attempting user registration for email: {0}", userDTO.Email);
             var result = _userRL.RegisterRL(userDTO);
@@ -86,6 +86,7 @@ namespace BusinessLayer.Service
             }
             return result;
         }
+
         public bool UpdateUserPassword(string email, ResetDTO resetDTO)
         {
             return _userRL.UpdateUserPassword(email, resetDTO);

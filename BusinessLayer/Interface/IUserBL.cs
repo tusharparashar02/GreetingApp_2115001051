@@ -10,7 +10,7 @@ namespace BusinessLayer.Interface
 {
     public interface IUserBL
     {
-        public User RegisterBL(UserDTO userDTO);
+        public UserEntity RegisterBL(UserDTO userDTO);
         ResponseLoginDTO LoginBL(LoginDTO loginDTO);
 
         bool ForgetBL(ForgetDTO forgetDTO);
